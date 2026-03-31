@@ -71,39 +71,42 @@ export const LoginForm = () => {
   return (
     <PageLayout>
       <div className="glass-card anim-card">
-        {/* Logo row */}
-        <div className="card-logo anim-1">
-          <div className="card-logo-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        {/* Brand */}
+        <div className="login-brand anim-1">
+          <div className="login-logo" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                d="M14 2 L1 11 L1 26 L27 26 L27 11 Z"
                 stroke="#fff"
-                strokeWidth="2"
-                strokeLinecap="round"
+                strokeWidth="1.8"
                 strokeLinejoin="round"
-                fill="none"
+              />
+              <path
+                d="M5 18 Q8.5 14.5 12 18 Q15.5 21.5 19 18 Q22.5 14.5 23 18"
+                stroke="#fff"
+                strokeWidth="1.5"
+                strokeLinecap="round"
               />
             </svg>
           </div>
-          <span className="card-logo-name">Supabase Login</span>
+          <h1 className="login-wordmark">HomeFlow</h1>
+          <p className="login-slogan">Deja que tu casa fluya</p>
         </div>
 
-        {/* Heading */}
-        <h1 className="card-title anim-2">
-          Bienvenido<em style={{ fontStyle: 'italic' }}>.</em>
-        </h1>
-        <p className="card-subtitle anim-3">Inicia sesión para continuar</p>
+        <div className="login-sep" />
+
+        <p className="login-form-label">Accede a tu cuenta</p>
 
         {/* Success notification after register */}
         {registered && (
-          <div className="success-banner anim-3" role="status">
+          <div className="success-banner anim-2" role="status">
             Cuenta creada correctamente. Ya puedes iniciar sesión.
           </div>
         )}
 
         {/* API error */}
         {error && (
-          <div className="error-banner anim-3" role="alert">
+          <div className="error-banner anim-2" role="alert">
             {error}
           </div>
         )}
