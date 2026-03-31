@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+
+    /* Strict — nunca lo bajes */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths alias — imports limpios */
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@widgets/*": ["./src/widgets/*"],
+      "@shared/*": ["./src/shared/*"]
+    },
+
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom/vitest"]
+  },
+  "include": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+}

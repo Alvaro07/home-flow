@@ -1,0 +1,99 @@
+name: CI
+
+# Se ejecuta en push a main y en cualquier PR
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancela runs anteriores del mismo PR si llega uno nuevo
+# Evita desperdiciar minutos de CI en runs obsoletos
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Job 1: Validación completa ─────────────────────────────
+  validate:
+    name: Lint, typecheck y tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configurar Node con caché de yarn
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      # 3. Instalar dependencias
+      # --frozen-lockfile garantiza que se usa exactamente
+      # el yarn.lock del repo — sin actualizaciones silenciosas
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # 4. Lint — detecta errores de código y estilo
+      - name: Lint
+        run: yarn lint
+
+      # 5. Typecheck — verifica tipos sin compilar
+      - name: Typecheck
+        run: yarn typecheck
+
+      # 6. Tests con cobertura
+      # Las variables de entorno vienen de los secretos de GitHub
+      - name: Tests
+        run: yarn test:coverage
+
+      # 7. Subir el reporte de cobertura como artefacto
+      # Lo puedes descargar desde la UI de GitHub Actions
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        # Se sube siempre, incluso si los tests fallan
+        # para poder ver qué falló exactamente
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  # ── Job 2: Build ───────────────────────────────────────────
+  # Solo corre en push a main — no en PRs
+  # Su función es verificar que el bundle de producción compila
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      # Guardar el build como artefacto por si lo necesitas deployar
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1

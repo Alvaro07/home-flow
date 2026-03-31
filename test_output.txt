@@ -1,0 +1,64 @@
+
+> react-ts@0.0.0 test:run
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv4.1.1 [39m[90m/Users/alvaro/Desktop/workspaces/github/supabase-login[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Unhandled Errors [49m[22m[31m⎯⎯⎯⎯⎯⎯[39m
+[31m[1m
+Vitest caught 3 unhandled errors during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Unhandled Error [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: [vitest-pool]: Failed to start forks worker for test files /Users/alvaro/Desktop/workspaces/github/supabase-login/src/features/auth/ui/LoginForm.test.tsx.[39m
+[90m [2m❯[22m node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:94[22m[39m
+[90m [2m❯[22m processTicksAndRejections node:internal/process/task_queues:[2m95:5[22m[39m
+[90m [2m❯[22m Pool.schedule node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:5[22m[39m
+
+[31m[1mCaused by: Error[22m: require() of ES Module /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/@exodus/bytes/encoding-lite.js from /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js not supported.
+Instead change the require of encoding-lite.js in /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js to a dynamic import() which is available in all CommonJS modules.[39m
+[90m [2m❯[22m Object.<anonymous> node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js:[2m2:41[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_REQUIRE_ESM' }[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Unhandled Error [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: [vitest-pool]: Failed to start forks worker for test files /Users/alvaro/Desktop/workspaces/github/supabase-login/src/features/auth/model/authStore.test.ts.[39m
+[90m [2m❯[22m node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:94[22m[39m
+[90m [2m❯[22m processTicksAndRejections node:internal/process/task_queues:[2m95:5[22m[39m
+[90m [2m❯[22m Pool.schedule node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:5[22m[39m
+
+[31m[1mCaused by: Error[22m: require() of ES Module /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/@exodus/bytes/encoding-lite.js from /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js not supported.
+Instead change the require of encoding-lite.js in /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js to a dynamic import() which is available in all CommonJS modules.[39m
+[90m [2m❯[22m Object.<anonymous> node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js:[2m2:41[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_REQUIRE_ESM' }[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Unhandled Error [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: [vitest-pool]: Failed to start forks worker for test files /Users/alvaro/Desktop/workspaces/github/supabase-login/src/features/auth/api/authApi.test.ts.[39m
+[90m [2m❯[22m node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:94[22m[39m
+[90m [2m❯[22m processTicksAndRejections node:internal/process/task_queues:[2m95:5[22m[39m
+[90m [2m❯[22m Pool.schedule node_modules/vitest/dist/chunks/cli-api.BUXBO6jS.js:[2m3449:5[22m[39m
+
+[31m[1mCaused by: Error[22m: require() of ES Module /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/@exodus/bytes/encoding-lite.js from /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js not supported.
+Instead change the require of encoding-lite.js in /Users/alvaro/Desktop/workspaces/github/supabase-login/node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js to a dynamic import() which is available in all CommonJS modules.[39m
+[90m [2m❯[22m Object.<anonymous> node_modules/html-encoding-sniffer/lib/html-encoding-sniffer.js:[2m2:41[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_REQUIRE_ESM' }[39m
+[31m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[39m
+
+
+[2m Test Files [22m [2mno tests[22m
+[2m      Tests [22m [2mno tests[22m
+[2m     Errors [22m [1m[31m3 errors[39m[22m
+[2m   Start at [22m 09:54:25
+[2m   Duration [22m 127ms[2m (transform 0ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)[22m
+
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.12.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.1
+npm notice To update run: npm install -g npm@11.12.1
+npm notice
