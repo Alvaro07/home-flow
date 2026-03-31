@@ -1,0 +1,69 @@
+/* ─── Card Logo row ──────────────────────────────────── */
+.card-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.card-logo-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-logo-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+.card-logo-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ─── Password strength bar ──────────────────────────── */
+.password-strength {
+  margin-top: 6px;
+  display: flex;
+  gap: 4px;
+}
+
+.password-strength-bar {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.3s ease;
+}
+
+.password-strength-bar.active-weak {
+  background: #ff6b7a;
+}
+.password-strength-bar.active-fair {
+  background: #ffd166;
+}
+.password-strength-bar.active-good {
+  background: #48cfad;
+}
+.password-strength-bar.active-strong {
+  background: var(--accent-b);
+}
+
+.password-strength-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
