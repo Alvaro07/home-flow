@@ -156,6 +156,7 @@ export type Database = {
           color: string | null
           created_at: string | null
           id: string
+          is_default: boolean
           name: string
           position: number
           user_id: string
@@ -164,6 +165,7 @@ export type Database = {
           color?: string | null
           created_at?: string | null
           id?: string
+          is_default?: boolean
           name: string
           position?: number
           user_id: string
@@ -172,6 +174,7 @@ export type Database = {
           color?: string | null
           created_at?: string | null
           id?: string
+          is_default?: boolean
           name?: string
           position?: number
           user_id?: string
