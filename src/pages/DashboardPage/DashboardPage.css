@@ -1,0 +1,81 @@
+/* ─── Dashboard Avatar ───────────────────────────────── */
+.avatar-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  box-shadow:
+    0 0 0 3px rgba(108, 99, 255, 0.25),
+    0 8px 32px rgba(108, 99, 255, 0.35);
+}
+
+.avatar-initials {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.dashboard-email {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  word-break: break-all;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.dashboard-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-b);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.dashboard-status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-b);
+  box-shadow: 0 0 8px var(--accent-b);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ─── Dashboard layout helpers ───────────────────────── */
+.dashboard-card {
+  text-align: center;
+}
+
+.dashboard-status-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+  margin-bottom: 20px;
+}

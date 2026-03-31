@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import { useAuthStore, selectUser, useAuth } from '@features/auth'
 import { PageLayout } from '@shared/ui/PageLayout'
-import { LogoutIcon } from '@shared/ui/icons'
+import { CartIcon, LogoutIcon } from '@shared/ui/icons'
+import { ROUTES } from '@app/router/routes'
+import './DashboardPage.css'
 
 const getInitials = (email: string): string => {
   const parts = email.split('@')[0]?.split(/[._-]/) ?? []
@@ -13,13 +16,13 @@ const getInitials = (email: string): string => {
 export const DashboardPage = () => {
   const user = useAuthStore(selectUser)
   const { logout, isLoading, error } = useAuth()
+  const navigate = useNavigate()
 
   const initials = user?.email ? getInitials(user.email) : '?'
 
   return (
     <PageLayout>
       <div className="glass-card dashboard-card anim-card">
-
         {/* Avatar */}
         <div className="avatar-ring anim-1" aria-hidden="true">
           <span className="avatar-initials">{initials}</span>
@@ -32,14 +35,21 @@ export const DashboardPage = () => {
 
         {/* Title */}
         <h1 className="card-title anim-2">Dashboard</h1>
-        <p className="card-subtitle dashboard-subtitle anim-3">
-          Conectado como
-        </p>
+        <p className="card-subtitle dashboard-subtitle anim-3">Conectado como</p>
 
         {/* Email pill */}
-        <div className="dashboard-email anim-3">
-          {user?.email ?? '—'}
-        </div>
+        <div className="dashboard-email anim-3">{user?.email ?? '—'}</div>
+
+        {/* Navigation */}
+        <button
+          className="btn-secondary btn-full anim-4"
+          onClick={() => {
+            void navigate(ROUTES.SHOPPING)
+          }}
+        >
+          <CartIcon className="btn-icon" />
+          Lista de la compra
+        </button>
 
         {/* Logout */}
         {error && (
@@ -50,7 +60,9 @@ export const DashboardPage = () => {
         <button
           id="logout-btn"
           className="btn-secondary btn-full anim-4"
-          onClick={() => { void logout() }}
+          onClick={() => {
+            void logout()
+          }}
           disabled={isLoading}
         >
           <LogoutIcon className="btn-icon" />

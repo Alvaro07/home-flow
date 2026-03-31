@@ -5,6 +5,7 @@ import { PageLayout } from '@shared/ui/PageLayout'
 import { EyeIcon, EyeOffIcon } from '@shared/ui/icons'
 import { ROUTES } from '@app/router/routes'
 import type { LoginCredentials } from '../api/authApi'
+import './RegisterForm.css'
 
 interface RegisterFormState {
   email: string

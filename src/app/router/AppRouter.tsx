@@ -3,6 +3,7 @@ import { ROUTES } from './routes'
 import { LoginPage } from '@pages/LoginPage'
 import { RegisterPage } from '@pages/RegisterPage'
 import { DashboardPage } from '@pages/DashboardPage'
+import { ShoppingPage } from '@pages/ShoppingPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
 import { ProtectedRoute } from '@widgets/ProtectedRoute'
 
@@ -22,6 +23,15 @@ export const AppRouter = () => {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.SHOPPING}
+          element={
+            <ProtectedRoute>
+              <ShoppingPage />
             </ProtectedRoute>
           }
         />
