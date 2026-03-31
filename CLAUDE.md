@@ -2,7 +2,7 @@
 
 ## Proyecto
 
-**HomeFlow** — app de gestión del hogar. *Deja que tu casa fluya.*
+**HomeFlow** — app de gestión del hogar. _Deja que tu casa fluya._
 
 App React + Supabase para gestionar la lista de la compra, el menú semanal y una biblioteca de platos guardados.
 
@@ -51,24 +51,24 @@ RLS habilitado en todas las tablas. Cada usuario solo ve sus propios datos.
 
 ## Features FSD
 
-| Feature | Tablas | Estado |
-|---|---|---|
-| `auth` | auth.users, profiles | Completo (heredado del template) |
-| `shopping` | supermarkets, shopping_items | Pendiente |
-| `menu` | weekly_menus | Pendiente |
-| `dishes` | dishes, dish_tags | Pendiente |
+| Feature    | Tablas                       | Estado                           |
+| ---------- | ---------------------------- | -------------------------------- |
+| `auth`     | auth.users, profiles         | Completo (heredado del template) |
+| `shopping` | supermarkets, shopping_items | Pendiente                        |
+| `menu`     | weekly_menus                 | Pendiente                        |
+| `dishes`   | dishes, dish_tags            | Pendiente                        |
 
 ## Páginas
 
-| Página | Ruta | Estado |
-|---|---|---|
-| `LoginPage` | `/login` | Completo |
-| `RegisterPage` | `/register` | Completo |
-| `NotFoundPage` | `*` | Completo |
-| `HomePage` | `/` | Pendiente |
+| Página         | Ruta        | Estado    |
+| -------------- | ----------- | --------- |
+| `LoginPage`    | `/login`    | Completo  |
+| `RegisterPage` | `/register` | Completo  |
+| `NotFoundPage` | `*`         | Completo  |
+| `HomePage`     | `/`         | Pendiente |
 | `ShoppingPage` | `/shopping` | Pendiente |
-| `MenuPage` | `/menu` | Pendiente |
-| `DishesPage` | `/dishes` | Pendiente |
+| `MenuPage`     | `/menu`     | Pendiente |
+| `DishesPage`   | `/dishes`   | Pendiente |
 
 ## Convenciones de código
 
