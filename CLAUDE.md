@@ -78,6 +78,13 @@ RLS habilitado en todas las tablas. Cada usuario solo ve sus propios datos.
 - Los errores de Supabase se mapean a mensajes en español en la capa `api/`
 - Commits: Conventional Commits (`feat:`, `fix:`, `test:`, `refactor:`, etc.)
 
+## Arquitectura CSS
+
+- **Estilos específicos de componente** → archivo `.css` junto al `.tsx`, importado en ese mismo componente
+- **Estilos compartidos reutilizables** → `src/shared/ui/` como archivos independientes por categoría (`glass-card.css`, `forms.css`, `buttons.css`…), importados desde `src/app/styles/index.css` con `@import`
+- **Globales** → `src/app/styles/index.css`: design tokens, reset, base (`html`/`body`/`#root`), keyframes globales y utilidades (`.anim-*`)
+- **`@keyframes`** → en el CSS del componente que los usa; si son globales (ej. `fadeUp` para `.anim-*`), en `index.css`
+
 ## Comandos frecuentes
 
 ```bash
