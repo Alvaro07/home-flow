@@ -3,6 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { PrimeReactProvider } from 'primereact/api'
 import { queryClient } from '@shared/lib/queryClient'
 import { useSession } from '@features/auth/model/useSession'
+import { ThemeProvider } from '@shared/lib/theme'
 
 // Componente interno que activa el listener de sesión
 // Está dentro de QueryClientProvider para poder usar hooks
@@ -17,10 +18,12 @@ interface AppProvidersProps {
 
 export const AppProviders = ({ children }: AppProvidersProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <PrimeReactProvider>
-        <SessionProvider>{children}</SessionProvider>
-      </PrimeReactProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <PrimeReactProvider>
+          <SessionProvider>{children}</SessionProvider>
+        </PrimeReactProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   )
 }
