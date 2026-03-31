@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { useTheme } from '@shared/lib/theme'
 import { SunIcon, MoonIcon } from '@shared/ui/icons'
+import './PageLayout.css'
 
 interface PageLayoutProps {
   children: ReactNode
