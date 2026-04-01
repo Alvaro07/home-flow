@@ -65,7 +65,10 @@ export const ShoppingPage = () => {
             type="button"
             className="shopping-tab-header__btn"
             aria-label={`Editar ${sm.name}`}
-            onClick={(e) => { e.stopPropagation(); setDialog({ mode: 'edit', supermarket: sm }) }}
+            onClick={(e) => {
+              e.stopPropagation()
+              setDialog({ mode: 'edit', supermarket: sm })
+            }}
           >
             <i className="pi pi-pencil" />
           </button>
@@ -73,7 +76,10 @@ export const ShoppingPage = () => {
             type="button"
             className="shopping-tab-header__btn shopping-tab-header__btn--delete"
             aria-label={`Eliminar ${sm.name}`}
-            onClick={(e) => { e.stopPropagation(); handleRemove(sm, index) }}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleRemove(sm, index)
+            }}
           >
             <i className="pi pi-times" />
           </button>
@@ -89,7 +95,9 @@ export const ShoppingPage = () => {
         <button
           type="button"
           className="shopping-page__back anim-1"
-          onClick={() => { void navigate(ROUTES.DASHBOARD) }}
+          onClick={() => {
+            void navigate(ROUTES.DASHBOARD)
+          }}
         >
           <i className="pi pi-arrow-left" />
           Volver
@@ -101,28 +109,45 @@ export const ShoppingPage = () => {
           <button
             type="button"
             className="btn-primary shopping-page__add-btn"
-            onClick={() => { setDialog({ mode: 'create' }) }}
+            onClick={() => {
+              setDialog({ mode: 'create' })
+            }}
             disabled={create.isPending}
           >
-            {create.isPending
-              ? <span className="btn-spinner" aria-hidden="true" />
-              : <i className="pi pi-plus" />
-            }
-            Nuevo supermercado
+            {create.isPending ? (
+              <span className="btn-spinner" aria-hidden="true" />
+            ) : (
+              <i className="pi pi-plus" />
+            )}
+            Nuevo super
           </button>
         </div>
 
         {/* Tabs */}
         {isLoading ? (
-          <div className="shopping-page__tabs-skeleton" aria-busy="true" aria-label="Cargando supermercados">
+          <div
+            className="shopping-page__tabs-skeleton"
+            aria-busy="true"
+            aria-label="Cargando supermercados"
+          >
             <div className="shopping-page__skeleton-nav">
               {[80, 110, 95].map((w, i) => (
-                <div key={i} className="shopping-page__skeleton-tab" style={{ width: w, '--skeleton-delay': `${String(i * 0.08)}s` } as React.CSSProperties} />
+                <div
+                  key={i}
+                  className="shopping-page__skeleton-tab"
+                  style={
+                    { width: w, '--skeleton-delay': `${String(i * 0.08)}s` } as React.CSSProperties
+                  }
+                />
               ))}
             </div>
             <div className="shopping-page__skeleton-panel">
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="shopping-page__skeleton-row" style={{ '--skeleton-delay': `${String(i * 0.06)}s` } as React.CSSProperties} />
+                <div
+                  key={i}
+                  className="shopping-page__skeleton-row"
+                  style={{ '--skeleton-delay': `${String(i * 0.06)}s` } as React.CSSProperties}
+                />
               ))}
             </div>
           </div>
@@ -130,7 +155,9 @@ export const ShoppingPage = () => {
           <TabView
             className="shopping-tabs anim-3"
             activeIndex={activeIndex}
-            onTabChange={(e) => { setActiveIndex(e.index) }}
+            onTabChange={(e) => {
+              setActiveIndex(e.index)
+            }}
           >
             {orderedTabs.map((sm, index) => (
               <TabPanel key={sm.id} header={renderTabHeader(sm, index)}>
@@ -148,13 +175,17 @@ export const ShoppingPage = () => {
           supermarket={dialog?.supermarket}
           isLoading={create.isPending || update.isPending}
           onSave={dialog?.mode === 'edit' ? handleUpdate : handleCreate}
-          onHide={() => { setDialog(null) }}
+          onHide={() => {
+            setDialog(null)
+          }}
         />
 
         {/* Confirm delete dialog */}
         <Dialog
           visible={confirmDelete !== null}
-          onHide={() => { setConfirmDelete(null) }}
+          onHide={() => {
+            setConfirmDelete(null)
+          }}
           header="Eliminar supermercado"
           className="supermarket-dialog"
           draggable={false}
@@ -162,13 +193,16 @@ export const ShoppingPage = () => {
         >
           <div className="supermarket-dialog__content">
             <p className="shopping-page__confirm-msg">
-              ¿Eliminar <strong>{confirmDelete?.supermarket.name}</strong>? Se borrarán también todos sus artículos y no podrás recuperarlos.
+              ¿Eliminar <strong>{confirmDelete?.supermarket.name}</strong>? Se borrarán también
+              todos sus artículos y no podrás recuperarlos.
             </p>
             <div className="supermarket-dialog__actions">
               <button
                 type="button"
                 className="btn-secondary"
-                onClick={() => { setConfirmDelete(null) }}
+                onClick={() => {
+                  setConfirmDelete(null)
+                }}
               >
                 Cancelar
               </button>
