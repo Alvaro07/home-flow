@@ -37,7 +37,7 @@ describe('useSupermarkets', () => {
 
       const { result } = renderHook(() => useSupermarkets(), { wrapper: createWrapper() })
 
-      await waitFor(() => expect(result.current.isLoading).toBe(false))
+      await waitFor(() => { expect(result.current.isLoading).toBe(false) })
 
       expect(result.current.supermarkets).toEqual([mockSupermarket])
       expect(result.current.error).toBeNull()
@@ -63,7 +63,7 @@ describe('useSupermarkets', () => {
 
       const { result } = renderHook(() => useSupermarkets(), { wrapper: createWrapper() })
 
-      await waitFor(() => expect(result.current.isLoading).toBe(false))
+      await waitFor(() => { expect(result.current.isLoading).toBe(false) })
 
       expect(result.current.error).not.toBeNull()
     })
@@ -99,7 +99,7 @@ describe('useSupermarkets', () => {
         await result.current.create.mutateAsync({ name: 'Mercadona' }).catch(() => {})
       })
 
-      await waitFor(() => expect(result.current.create.isError).toBe(true))
+      await waitFor(() => { expect(result.current.create.isError).toBe(true) })
     })
   })
 

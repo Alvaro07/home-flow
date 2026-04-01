@@ -42,7 +42,7 @@ describe('useShoppingItems', () => {
         wrapper: createWrapper(),
       })
 
-      await waitFor(() => expect(result.current.isLoading).toBe(false))
+      await waitFor(() => { expect(result.current.isLoading).toBe(false) })
 
       expect(result.current.items).toEqual([mockItem])
       expect(result.current.error).toBeNull()
@@ -72,7 +72,7 @@ describe('useShoppingItems', () => {
         wrapper: createWrapper(),
       })
 
-      await waitFor(() => expect(result.current.isLoading).toBe(false))
+      await waitFor(() => { expect(result.current.isLoading).toBe(false) })
 
       expect(result.current.error).not.toBeNull()
     })
@@ -122,7 +122,7 @@ describe('useShoppingItems', () => {
           .catch(() => {})
       })
 
-      await waitFor(() => expect(result.current.create.isError).toBe(true))
+      await waitFor(() => { expect(result.current.create.isError).toBe(true) })
     })
   })
 
