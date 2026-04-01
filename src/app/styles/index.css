@@ -51,12 +51,12 @@
   --glass-border: rgba(0, 0, 0, 0.07);
   --glass-shadow: 0 32px 80px rgba(0, 0, 0, 0.1);
 
-  --text-primary: #1c1b2e;
-  --text-secondary: rgba(28, 27, 46, 0.5);
+  --text-primary: #0f0e1a;
+  --text-secondary: rgba(15, 14, 26, 0.55);
 
   --input-bg: rgba(255, 255, 255, 0.8);
   --input-border: rgba(0, 0, 0, 0.1);
-  --input-placeholder: rgba(28, 27, 46, 0.35);
+  --input-placeholder: rgba(15, 14, 26, 0.4);
 
   --dialog-bg: rgba(247, 245, 240, 0.97);
 }
@@ -71,9 +71,15 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 body {
