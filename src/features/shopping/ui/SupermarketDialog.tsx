@@ -12,7 +12,14 @@ interface Props {
   onHide: () => void
 }
 
-export const SupermarketDialog = ({ visible, mode, supermarket, isLoading, onSave, onHide }: Props) => {
+export const SupermarketDialog = ({
+  visible,
+  mode,
+  supermarket,
+  isLoading,
+  onSave,
+  onHide,
+}: Props) => {
   // Initialized once on mount — the parent uses `key` to force a remount
   // when mode or supermarket changes, so this value is always fresh
   const [name, setName] = useState(mode === 'edit' && supermarket ? supermarket.name : '')
@@ -36,8 +43,12 @@ export const SupermarketDialog = ({ visible, mode, supermarket, isLoading, onSav
         <input
           className="field-input"
           value={name}
-          onChange={(e) => { setName(e.target.value) }}
-          onKeyDown={(e) => { if (e.key === 'Enter') handleSave() }}
+          onChange={(e) => {
+            setName(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleSave()
+          }}
           placeholder="Nombre del supermercado"
           autoFocus
         />
