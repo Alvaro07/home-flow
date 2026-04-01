@@ -1,0 +1,31 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6c63ff"/>
+      <stop offset="100%" stop-color="#48cfad"/>
+    </linearGradient>
+    <linearGradient id="grad-door" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5248d4"/>
+      <stop offset="100%" stop-color="#35a889"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="200" height="200" rx="44" fill="url(#grad)"/>
+
+  <!-- House: curved roof + rectangular body as one unified shape -->
+  <path d="M 38 96 Q 60 36 100 26 Q 140 36 162 96 V 152 H 38 Z" fill="white"/>
+
+  <!-- Door: arched opening (shows gradient through) -->
+  <path d="M 88 152 V 128 A 12 12 0 0 1 112 128 V 152 Z" fill="url(#grad-door)" opacity="0.5"/>
+
+  <!-- Left window -->
+  <rect x="48" y="106" width="28" height="22" rx="6" fill="url(#grad-door)" opacity="0.4"/>
+
+  <!-- Right window -->
+  <rect x="124" y="106" width="28" height="22" rx="6" fill="url(#grad-door)" opacity="0.4"/>
+
+  <!-- Flow wave below house -->
+  <path d="M 38 168 Q 69 154 100 168 Q 131 182 162 168"
+    stroke="white" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
+</svg>

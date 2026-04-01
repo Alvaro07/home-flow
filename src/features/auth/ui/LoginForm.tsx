@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../model/useAuth'
 import { PageLayout } from '@shared/ui/PageLayout'
 import { EyeIcon, EyeOffIcon } from '@shared/ui/icons'
+import { LogoMark } from '@shared/ui/logo/LogoMark'
 import { ROUTES } from '@app/router/routes'
 import type { LoginCredentials } from '../api/authApi'
 import './LoginForm.css'
@@ -74,22 +75,7 @@ export const LoginForm = () => {
       <div className="glass-card anim-card">
         {/* Brand */}
         <div className="login-brand anim-1">
-          <div className="login-logo" aria-hidden="true">
-            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M14 2 L1 11 L1 26 L27 26 L27 11 Z"
-                stroke="#fff"
-                strokeWidth="1.8"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5 18 Q8.5 14.5 12 18 Q15.5 21.5 19 18 Q22.5 14.5 23 18"
-                stroke="#fff"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
+          <LogoMark size={56} />
           <h1 className="login-wordmark">HomeFlow</h1>
           <p className="login-slogan">Deja que tu casa fluya</p>
         </div>

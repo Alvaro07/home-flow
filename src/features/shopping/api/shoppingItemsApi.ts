@@ -2,7 +2,7 @@ import { supabase } from '@shared/lib/supabase'
 import type { Tables } from '@shared/lib/supabase'
 import type { ShoppingResult, ReorderPayload, ShoppingError } from './shopping.types'
 
-type ShoppingItem = Tables<'shopping_items'>
+export type ShoppingItem = Tables<'shopping_items'>
 
 export interface CreateShoppingItemInput {
   supermarket_id: string
