@@ -32,6 +32,18 @@
   text-transform: uppercase;
 }
 
+/* ─── Heading (match login-form-label size) ──────────── */
+.glass-card .card-title {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.glass-card .card-subtitle {
+  font-size: 0.78rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
 /* ─── Password strength bar ──────────────────────────── */
 .password-strength {
   margin-top: 6px;

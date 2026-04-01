@@ -28,6 +28,9 @@
   --input-bg: rgba(255, 255, 255, 0.055);
   --input-border: rgba(255, 255, 255, 0.1);
   --input-focus: var(--accent-a);
+  --input-placeholder: rgba(240, 240, 248, 0.28);
+
+  --dialog-bg: rgba(12, 12, 22, 0.96);
 
   --radius-card: 20px;
   --radius-input: 10px;
@@ -53,6 +56,9 @@
 
   --input-bg: rgba(255, 255, 255, 0.8);
   --input-border: rgba(0, 0, 0, 0.1);
+  --input-placeholder: rgba(28, 27, 46, 0.35);
+
+  --dialog-bg: rgba(247, 245, 240, 0.97);
 }
 
 /* ─── Reset ─────────────────────────────────────────── */

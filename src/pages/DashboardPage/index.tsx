@@ -1,73 +1,54 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore, selectUser, useAuth } from '@features/auth'
 import { PageLayout } from '@shared/ui/PageLayout'
-import { CartIcon, LogoutIcon } from '@shared/ui/icons'
+import { CartIcon } from '@shared/ui/icons'
 import { ROUTES } from '@app/router/routes'
 import './DashboardPage.css'
 
-const getInitials = (email: string): string => {
-  const parts = email.split('@')[0]?.split(/[._-]/) ?? []
-  if (parts.length >= 2) {
-    return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase()
-  }
-  return (parts[0]?.slice(0, 2) ?? '??').toUpperCase()
+interface NavItem {
+  label: string
+  description: string
+  icon: React.ReactNode
+  route: string
 }
 
+const NAV_ITEMS: NavItem[] = [
+  {
+    label: 'Lista de la compra',
+    description: 'Gestiona tus listas por supermercado',
+    icon: <CartIcon width={20} height={20} />,
+    route: ROUTES.SHOPPING,
+  },
+]
+
 export const DashboardPage = () => {
-  const user = useAuthStore(selectUser)
-  const { logout, isLoading, error } = useAuth()
   const navigate = useNavigate()
 
-  const initials = user?.email ? getInitials(user.email) : '?'
-
   return (
-    <PageLayout>
+    <PageLayout withHeader>
       <div className="glass-card dashboard-card anim-card">
-        {/* Avatar */}
-        <div className="avatar-ring anim-1" aria-hidden="true">
-          <span className="avatar-initials">{initials}</span>
-        </div>
-
-        {/* Status badge */}
-        <div className="dashboard-status-wrap anim-2">
-          <span className="dashboard-status">Sesión activa</span>
-        </div>
-
-        {/* Title */}
-        <h1 className="card-title anim-2">Dashboard</h1>
-        <p className="card-subtitle dashboard-subtitle anim-3">Conectado como</p>
-
-        {/* Email pill */}
-        <div className="dashboard-email anim-3">{user?.email ?? '—'}</div>
-
-        {/* Navigation */}
-        <button
-          className="btn-secondary btn-full anim-4"
-          onClick={() => {
-            void navigate(ROUTES.SHOPPING)
-          }}
-        >
-          <CartIcon className="btn-icon" />
-          Lista de la compra
-        </button>
-
-        {/* Logout */}
-        {error && (
-          <div className="error-banner" role="alert">
-            {error}
-          </div>
-        )}
-        <button
-          id="logout-btn"
-          className="btn-secondary btn-full anim-4"
-          onClick={() => {
-            void logout()
-          }}
-          disabled={isLoading}
-        >
-          <LogoutIcon className="btn-icon" />
-          Cerrar sesión
-        </button>
+        <nav aria-label="Secciones de la app">
+          <h2 className="dashboard-nav-title anim-1">Tu espacio</h2>
+          <ul className="dashboard-nav-list anim-2" role="list">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.route}>
+                <button
+                  type="button"
+                  className="dashboard-nav-item"
+                  onClick={() => { void navigate(item.route) }}
+                >
+                  <span className="dashboard-nav-item__icon" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <span className="dashboard-nav-item__text">
+                    <span className="dashboard-nav-item__label">{item.label}</span>
+                    <span className="dashboard-nav-item__desc">{item.description}</span>
+                  </span>
+                  <i className="pi pi-chevron-right dashboard-nav-item__arrow" aria-hidden="true" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </PageLayout>
   )

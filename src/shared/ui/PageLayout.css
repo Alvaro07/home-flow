@@ -90,6 +90,11 @@
   padding: 24px;
 }
 
+.page-center--with-header {
+  align-items: flex-start;
+  padding-top: calc(60px + 2rem);
+}
+
 /* ─── Theme toggle ───────────────────────────────────── */
 .theme-toggle {
   position: fixed;

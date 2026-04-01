@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../model/useAuth'
 import { PageLayout } from '@shared/ui/PageLayout'
 import { EyeIcon, EyeOffIcon } from '@shared/ui/icons'
+import { LogoMark } from '@shared/ui/logo/LogoMark'
 import { ROUTES } from '@app/router/routes'
 import type { LoginCredentials } from '../api/authApi'
 import './RegisterForm.css'
@@ -108,22 +109,14 @@ export const RegisterForm = () => {
   return (
     <PageLayout>
       <div className="glass-card anim-card">
-        {/* Logo row */}
-        <div className="card-logo anim-1">
-          <div className="card-logo-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                stroke="#fff"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-          </div>
-          <span className="card-logo-name">Supabase Login</span>
+        {/* Brand */}
+        <div className="login-brand anim-1">
+          <LogoMark size={56} />
+          <h1 className="login-wordmark">HomeFlow</h1>
+          <p className="login-slogan">Deja que tu casa fluya</p>
         </div>
+
+        <div className="login-sep" />
 
         {/* Heading */}
         <h1 className="card-title anim-2">

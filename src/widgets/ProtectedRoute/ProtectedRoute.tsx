@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuthStore, selectIsAuthenticated, selectIsLoading } from '@features/auth'
+import { AppHeader } from '@widgets/AppHeader/AppHeader'
 import { ROUTES } from '@app/router/routes'
 
 interface ProtectedRouteProps {
@@ -26,5 +27,10 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />
   }
 
-  return children
+  return (
+    <>
+      <AppHeader />
+      {children}
+    </>
+  )
 }
