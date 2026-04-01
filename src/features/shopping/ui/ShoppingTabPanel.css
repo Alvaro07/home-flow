@@ -1,0 +1,179 @@
+/* ─── Panel root ──────────────────────────────────────── */
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 0 2rem;
+}
+
+/* ─── Add form ────────────────────────────────────────── */
+.tab-panel__add-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.tab-panel__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.tab-panel__add-btn.btn-primary {
+  width: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 14px 20px;
+}
+
+/* ─── Skeleton rows ───────────────────────────────────── */
+.tab-panel__skeleton {
+  height: 50px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    var(--glass-bg) 25%,
+    rgba(255, 255, 255, 0.06) 50%,
+    var(--glass-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  animation-delay: var(--skeleton-delay, 0s);
+  border: 1px solid var(--glass-border);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Spinner in danger button ────────────────────────── */
+.btn-spinner--danger {
+  border-color: rgba(255, 107, 122, 0.35);
+  border-top-color: #ff6b7a;
+}
+
+/* ─── Empty state ─────────────────────────────────────── */
+.tab-panel__empty {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--glass-border);
+  border-radius: 12px;
+}
+
+/* ─── Item list ───────────────────────────────────────── */
+.tab-panel__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tab-panel__item {
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.tab-panel__item--selected {
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.25);
+}
+
+.tab-panel__item-label {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ─── Checkbox ────────────────────────────────────────── */
+.tab-panel__checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--glass-border);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tab-panel__checkbox:checked {
+  background: var(--accent-a);
+  border-color: var(--accent-a);
+}
+
+.tab-panel__checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ─── Item text ───────────────────────────────────────── */
+.tab-panel__item-name {
+  flex: 1;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: opacity 0.15s;
+}
+
+.tab-panel__item--selected .tab-panel__item-name {
+  opacity: 0.5;
+}
+
+.tab-panel__item-qty {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Bulk delete action ──────────────────────────────── */
+.tab-panel__actions {
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeUp 0.2s ease both;
+}
+
+/* ─── Danger button ───────────────────────────────────── */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-btn);
+  border: 1px solid rgba(255, 107, 122, 0.35);
+  background: rgba(255, 107, 122, 0.08);
+  color: #ff6b7a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: rgba(255, 107, 122, 0.15);
+  border-color: rgba(255, 107, 122, 0.5);
+}
+
+.btn-danger:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

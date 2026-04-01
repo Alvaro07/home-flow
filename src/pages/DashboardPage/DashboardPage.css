@@ -1,81 +1,97 @@
-/* ─── Dashboard Avatar ───────────────────────────────── */
-.avatar-ring {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--accent-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  box-shadow:
-    0 0 0 3px rgba(108, 99, 255, 0.25),
-    0 8px 32px rgba(108, 99, 255, 0.35);
+/* ─── Card override — same width as shopping ─────────── */
+.glass-card.dashboard-card {
+  max-width: 860px;
+  padding: 1.75rem 1.5rem 2rem;
+  align-self: flex-start;
 }
 
-.avatar-initials {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  color: #fff;
-  line-height: 1;
+@media (min-width: 768px) {
+  .glass-card.dashboard-card {
+    padding: 2rem 3rem 2.5rem;
+  }
 }
 
-.dashboard-email {
+/* ─── Nav section ─────────────────────────────────────── */
+.dashboard-nav-title {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  word-break: break-all;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border: 1px solid var(--glass-border);
-  margin-bottom: 28px;
-  text-align: center;
-}
-
-.dashboard-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent-b);
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
 }
 
-.dashboard-status::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-b);
-  box-shadow: 0 0 8px var(--accent-b);
-  animation: pulse 2.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-
-/* ─── Dashboard layout helpers ───────────────────────── */
-.dashboard-card {
-  text-align: center;
-}
-
-.dashboard-status-wrap {
+.dashboard-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.dashboard-subtitle {
-  margin-bottom: 20px;
+/* ─── Nav item block ──────────────────────────────────── */
+.dashboard-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.dashboard-nav-item:hover {
+  background: rgba(108, 99, 255, 0.06);
+  border-color: rgba(108, 99, 255, 0.2);
+  transform: translateX(2px);
+}
+
+.dashboard-nav-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.18);
+  color: var(--accent-a);
+}
+
+.dashboard-nav-item__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-nav-item__label {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.dashboard-nav-item__desc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.dashboard-nav-item__arrow {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.dashboard-nav-item:hover .dashboard-nav-item__arrow {
+  color: var(--accent-a);
+  transform: translateX(2px);
 }

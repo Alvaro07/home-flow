@@ -37,7 +37,7 @@
 }
 
 .field-input::placeholder {
-  color: rgba(240, 240, 248, 0.22);
+  color: var(--input-placeholder);
 }
 
 .field-input:focus {
