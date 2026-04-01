@@ -34,11 +34,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('hf-theme', theme)
   }, [theme])
 
-  const toggleTheme = useCallback(() => setTheme((t) => (t === 'dark' ? 'light' : 'dark')), [])
+  const toggleTheme = useCallback(() => { setTheme((t) => (t === 'dark' ? 'light' : 'dark')) }, [])
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = (): ThemeContextValue => {
   const ctx = useContext(ThemeContext)
   if (!ctx) throw new Error('useTheme must be used within ThemeProvider')
