@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { menuApi } from '../api/menuApi'
 import type { UpsertMealInput } from '../api/menuApi'
 import { MenuApiError } from '../api/menu.types'
+import type { DayOfWeek } from '../api/menu.types'
 
 export const weeklyMenuQueryKey = ['weekly-menu'] as const
 
@@ -37,11 +38,29 @@ export const useWeeklyMenu = () => {
     onSuccess: invalidate,
   })
 
+  const clearDay = useMutation({
+    mutationFn: async (dayOfWeek: DayOfWeek) => {
+      const result = await menuApi.clearDay(dayOfWeek)
+      if (result.error) throw new MenuApiError(result.error)
+    },
+    onSuccess: invalidate,
+  })
+
+  const clearWeek = useMutation({
+    mutationFn: async () => {
+      const result = await menuApi.clearWeek()
+      if (result.error) throw new MenuApiError(result.error)
+    },
+    onSuccess: invalidate,
+  })
+
   return {
     slots: query.data ?? [],
     isLoading: query.isLoading,
     error: query.error,
     upsert,
     clear,
+    clearDay,
+    clearWeek,
   }
 }

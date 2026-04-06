@@ -4,6 +4,7 @@ import { LoginPage } from '@pages/LoginPage'
 import { RegisterPage } from '@pages/RegisterPage'
 import { DashboardPage } from '@pages/DashboardPage'
 import { ShoppingPage } from '@pages/ShoppingPage'
+import { MenuPage } from '@pages/MenuPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
 import { ProtectedRoute } from '@widgets/ProtectedRoute'
 
@@ -32,6 +33,15 @@ export const AppRouter = () => {
           element={
             <ProtectedRoute>
               <ShoppingPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.MENU}
+          element={
+            <ProtectedRoute>
+              <MenuPage />
             </ProtectedRoute>
           }
         />

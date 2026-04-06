@@ -54,6 +54,33 @@ export const menuApi = {
     if (error) return { data: null, error: mapError(error) }
     return { data: undefined, error: null }
   },
+
+  clearDay: async (dayOfWeek: DayOfWeek): Promise<MenuResult<void>> => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return { data: null, error: { message: 'No autenticado' } }
+
+    const { error } = await supabase
+      .from('weekly_menus')
+      .delete()
+      .eq('user_id', session.user.id)
+      .eq('day_of_week', dayOfWeek)
+
+    if (error) return { data: null, error: mapError(error) }
+    return { data: undefined, error: null }
+  },
+
+  clearWeek: async (): Promise<MenuResult<void>> => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return { data: null, error: { message: 'No autenticado' } }
+
+    const { error } = await supabase
+      .from('weekly_menus')
+      .delete()
+      .eq('user_id', session.user.id)
+
+    if (error) return { data: null, error: mapError(error) }
+    return { data: undefined, error: null }
+  },
 }
 
 const mapError = (error: { message: string; code?: string }): MenuError => {

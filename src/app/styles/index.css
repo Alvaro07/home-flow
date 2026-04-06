@@ -14,21 +14,29 @@
   --bg-mesh-c: #061a30;
 
   --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-border: rgba(255, 255, 255, 0.15);
   --glass-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-bg-shimmer: rgba(255, 255, 255, 0.07);
 
   --accent-a: #6c63ff;
   --accent-b: #48cfad;
   --accent-gradient: linear-gradient(135deg, var(--accent-a), var(--accent-b));
 
   --text-primary: #f0f0f8;
-  --text-secondary: rgba(240, 240, 248, 0.5);
+  --text-secondary: rgba(240, 240, 248, 0.65);
+  --text-label: rgba(240, 240, 248, 0.75);
+  --text-muted: rgba(240, 240, 248, 0.45);
   --text-error: #ff6b7a;
 
   --input-bg: rgba(255, 255, 255, 0.055);
-  --input-border: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.18);
   --input-focus: var(--accent-a);
-  --input-placeholder: rgba(240, 240, 248, 0.28);
+  --input-placeholder: rgba(240, 240, 248, 0.40);
+
+  --btn-secondary-bg: rgba(255, 255, 255, 0.07);
+  --btn-secondary-bg-hover: rgba(255, 255, 255, 0.13);
+  --btn-secondary-border-hover: rgba(255, 255, 255, 0.22);
 
   --dialog-bg: rgba(12, 12, 22, 0.96);
 
@@ -48,15 +56,23 @@
   --bg-mesh-c: #d4ecff;
 
   --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-border: rgba(0, 0, 0, 0.14);
   --glass-shadow: 0 32px 80px rgba(0, 0, 0, 0.1);
+  --glass-bg-hover: rgba(0, 0, 0, 0.05);
+  --glass-bg-shimmer: rgba(0, 0, 0, 0.05);
 
   --text-primary: #0f0e1a;
-  --text-secondary: rgba(15, 14, 26, 0.55);
+  --text-secondary: rgba(15, 14, 26, 0.68);
+  --text-label: rgba(15, 14, 26, 0.68);
+  --text-muted: rgba(15, 14, 26, 0.42);
 
   --input-bg: rgba(255, 255, 255, 0.8);
-  --input-border: rgba(0, 0, 0, 0.1);
-  --input-placeholder: rgba(15, 14, 26, 0.4);
+  --input-border: rgba(0, 0, 0, 0.16);
+  --input-placeholder: rgba(15, 14, 26, 0.48);
+
+  --btn-secondary-bg: rgba(0, 0, 0, 0.05);
+  --btn-secondary-bg-hover: rgba(0, 0, 0, 0.09);
+  --btn-secondary-border-hover: rgba(0, 0, 0, 0.20);
 
   --dialog-bg: rgba(247, 245, 240, 0.97);
 }
