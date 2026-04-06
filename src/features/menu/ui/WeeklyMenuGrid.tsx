@@ -43,8 +43,8 @@ export const WeeklyMenuGrid = () => {
   const [confirmClearDay, setConfirmClearDay] = useState<DayOfWeek | null>(null)
   const today = getTodayDow()
 
-  const slotMap = new Map(slots.map((s) => [`${s.day_of_week}-${s.meal_type}`, s]))
-  const getSlot = (day: DayOfWeek, meal: MealType) => slotMap.get(`${day}-${meal}`)
+  const slotMap = new Map(slots.map((s) => [`${String(s.day_of_week)}-${s.meal_type}`, s]))
+  const getSlot = (day: DayOfWeek, meal: MealType) => slotMap.get(`${String(day)}-${meal}`)
   const dayHasContent = (day: DayOfWeek) => MEAL_ORDER.some((meal) => getSlot(day, meal))
 
   const openMealDialog = (day: DayOfWeek, mealType: MealType) => {
@@ -53,11 +53,11 @@ export const WeeklyMenuGrid = () => {
 
   const handleConfirmClearDay = () => {
     if (confirmClearDay === null) return
-    clearDay.mutate(confirmClearDay, { onSuccess: () => setConfirmClearDay(null) })
+    clearDay.mutate(confirmClearDay, { onSuccess: () => { setConfirmClearDay(null) } })
   }
 
   const handleConfirmClearWeek = () => {
-    clearWeek.mutate(undefined, { onSuccess: () => setConfirmClearWeek(false) })
+    clearWeek.mutate(undefined, { onSuccess: () => { setConfirmClearWeek(false) } })
   }
 
   return (
@@ -69,7 +69,7 @@ export const WeeklyMenuGrid = () => {
           <button
             type="button"
             className="btn-danger weekly-grid__clear-week-btn"
-            onClick={() => setConfirmClearWeek(true)}
+            onClick={() => { setConfirmClearWeek(true) }}
             disabled={slots.length === 0 || clearWeek.isPending}
           >
             {clearWeek.isPending
@@ -89,7 +89,7 @@ export const WeeklyMenuGrid = () => {
                 key={i}
                 className="day-card day-card--skeleton"
                 aria-hidden="true"
-                style={{ '--skeleton-delay': `${i * 0.05}s` } as React.CSSProperties}
+                style={{ '--skeleton-delay': `${String(i * 0.05)}s` } as React.CSSProperties}
               >
                 <div className="day-card__skeleton-header" />
                 {MEAL_ORDER.map((_, j) => (
@@ -105,7 +105,7 @@ export const WeeklyMenuGrid = () => {
                   key={day}
                   role="listitem"
                   className={`day-card anim-card${isToday ? ' day-card--today' : ''}`}
-                  style={{ animationDelay: `${index * 0.06}s` }}
+                  style={{ animationDelay: `${String(index * 0.06)}s` }}
                   aria-label={`${DAY_NAMES[day]}${isToday ? ', hoy' : ''}`}
                 >
                   <header className="day-card__header">
@@ -115,7 +115,7 @@ export const WeeklyMenuGrid = () => {
                       <button
                         type="button"
                         className="btn-danger day-card__delete-btn"
-                        onClick={() => setConfirmClearDay(day)}
+                        onClick={() => { setConfirmClearDay(day) }}
                         disabled={!hasContent || clearDay.isPending}
                         aria-label={`Borrar ${DAY_NAMES[day]}`}
                       >
@@ -135,7 +135,7 @@ export const WeeklyMenuGrid = () => {
                           key={meal}
                           type="button"
                           className={`meal-slot meal-slot--${meal}${label ? ' meal-slot--filled' : ''}`}
-                          onClick={() => openMealDialog(day, meal)}
+                          onClick={() => { openMealDialog(day, meal) }}
                           aria-label={`${meta.label}: ${label ?? 'vacío, pulsa para añadir'}`}
                         >
                           <span className="meal-slot__header">
@@ -159,19 +159,19 @@ export const WeeklyMenuGrid = () => {
       {/* Meal edit dialog */}
       {mealDialog && (
         <MealDialog
-          key={`${mealDialog.day}-${mealDialog.mealType}`}
+          key={`${String(mealDialog.day)}-${mealDialog.mealType}`}
           visible
           day={mealDialog.day}
           mealType={mealDialog.mealType}
           slot={mealDialog.slot}
-          onHide={() => setMealDialog(null)}
+          onHide={() => { setMealDialog(null) }}
         />
       )}
 
       {/* Confirm clear day */}
       <Dialog
         visible={confirmClearDay !== null}
-        onHide={() => setConfirmClearDay(null)}
+        onHide={() => { setConfirmClearDay(null) }}
         header="Borrar día"
         className="supermarket-dialog"
         draggable={false}
@@ -187,7 +187,7 @@ export const WeeklyMenuGrid = () => {
             <button
               type="button"
               className="btn-secondary"
-              onClick={() => setConfirmClearDay(null)}
+              onClick={() => { setConfirmClearDay(null) }}
             >
               Cancelar
             </button>
@@ -210,7 +210,7 @@ export const WeeklyMenuGrid = () => {
       {/* Confirm clear week */}
       <Dialog
         visible={confirmClearWeek}
-        onHide={() => setConfirmClearWeek(false)}
+        onHide={() => { setConfirmClearWeek(false) }}
         header="Borrar semana completa"
         className="supermarket-dialog"
         draggable={false}
@@ -224,7 +224,7 @@ export const WeeklyMenuGrid = () => {
             <button
               type="button"
               className="btn-secondary"
-              onClick={() => setConfirmClearWeek(false)}
+              onClick={() => { setConfirmClearWeek(false) }}
             >
               Cancelar
             </button>
