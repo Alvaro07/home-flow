@@ -36,18 +36,18 @@ type Mode = 'text' | 'dish'
 
 export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
   const initialMode: Mode = slot?.dish_id ? 'dish' : 'text'
-  const [mode, setMode] = useState<Mode>(initialMode)
+  const [mode, setMode] = useState(initialMode)
   const [description, setDescription] = useState(slot?.description ?? '')
-  const [selectedDishId, setSelectedDishId] = useState<string>(slot?.dish_id ?? '')
+  const [selectedDishId, setSelectedDishId] = useState(slot?.dish_id ?? '')
   const [itemName, setItemName] = useState('')
-  const [selectedSupermarketId, setSelectedSupermarketId] = useState<string>('')
+  const [selectedSupermarketId, setSelectedSupermarketId] = useState('')
 
   const { dishes, isLoading: dishesLoading } = useDishes()
   const { supermarkets, isLoading: supermarketsLoading } = useSupermarkets()
   const { upsert, clear } = useWeeklyMenu()
   const queryClient = useQueryClient()
 
-  const defaultSupermarketId = supermarkets.find((s) => s.is_default)?.id ?? supermarkets[0]?.id ?? ''
+  const defaultSupermarketId = supermarkets.find((s) => s.is_default)?.id ?? supermarkets.at(0)?.id ?? ''
   const effectiveSupermarketId = selectedSupermarketId || defaultSupermarketId
 
   const addItem = useMutation({
@@ -58,7 +58,7 @@ export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
         position: 0,
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['shopping-items'] })
+      void queryClient.invalidateQueries({ queryKey: ['shopping-items'] })
       setItemName('')
     },
   })
@@ -119,14 +119,14 @@ export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
             <button
               type="button"
               className={`meal-dialog__mode-btn${mode === 'text' ? ' meal-dialog__mode-btn--active' : ''}`}
-              onClick={() => setMode('text')}
+              onClick={() => { setMode('text') }}
             >
               Texto libre
             </button>
             <button
               type="button"
               className={`meal-dialog__mode-btn${mode === 'dish' ? ' meal-dialog__mode-btn--active' : ''}`}
-              onClick={() => setMode('dish')}
+              onClick={() => { setMode('dish') }}
             >
               <i className="pi pi-book" aria-hidden="true" />
               Recetas
