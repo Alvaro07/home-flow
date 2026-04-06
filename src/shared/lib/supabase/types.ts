@@ -193,6 +193,7 @@ export type Database = {
         Row: {
           day_of_week: number
           description: string | null
+          dish_id: string | null
           id: string
           meal_type: string
           updated_at: string | null
@@ -201,6 +202,7 @@ export type Database = {
         Insert: {
           day_of_week: number
           description?: string | null
+          dish_id?: string | null
           id?: string
           meal_type: string
           updated_at?: string | null
@@ -209,12 +211,20 @@ export type Database = {
         Update: {
           day_of_week?: number
           description?: string | null
+          dish_id?: string | null
           id?: string
           meal_type?: string
           updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "weekly_menus_dish_id_fkey"
+            columns: ["dish_id"]
+            isOneToOne: false
+            referencedRelation: "dishes"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "weekly_menus_user_id_fkey"
             columns: ["user_id"]
