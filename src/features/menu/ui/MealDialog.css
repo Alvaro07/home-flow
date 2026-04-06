@@ -1,0 +1,185 @@
+/* ─── Dialog overlay ──────────────────────────────────── */
+.p-dialog-mask {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ─── Dialog container ────────────────────────────────── */
+.meal-dialog.p-dialog {
+  background: var(--dialog-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  box-shadow: var(--glass-shadow);
+  width: min(520px, 92vw);
+  overflow: hidden;
+}
+
+.meal-dialog .p-dialog-header {
+  background: transparent;
+  border-bottom: 1px solid var(--glass-border);
+  padding: 1.25rem 1.5rem;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.meal-dialog .p-dialog-header-icons .p-dialog-header-close {
+  color: var(--text-secondary);
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.meal-dialog .p-dialog-header-icons .p-dialog-header-close:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg);
+}
+
+.meal-dialog .p-dialog-content {
+  background: transparent;
+  padding: 0;
+}
+
+/* ─── Content wrapper ─────────────────────────────────── */
+.meal-dialog__content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Sections ────────────────────────────────────────── */
+.meal-dialog__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.375rem 1.5rem;
+}
+
+.meal-dialog__section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+}
+
+/* ─── Divider ─────────────────────────────────────────── */
+.meal-dialog__divider {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 0 1.5rem;
+}
+
+/* ─── Mode toggle (segmented control) ────────────────── */
+.meal-dialog__mode-toggle {
+  display: flex;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.meal-dialog__mode-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.meal-dialog__mode-btn:hover:not(.meal-dialog__mode-btn--active) {
+  background: var(--glass-bg-hover);
+  color: var(--text-primary);
+}
+
+.meal-dialog__mode-btn--active {
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(108, 99, 255, 0.35);
+}
+
+/* ─── Meal actions ────────────────────────────────────── */
+.meal-dialog__meal-actions {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+}
+
+.meal-dialog__save-btn.btn-primary {
+  width: auto;
+  flex: 1;
+  padding: 12px 20px;
+}
+
+/* ─── Select custom arrow ─────────────────────────────── */
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(240,240,248,0.45)' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.field-select:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Cart row ────────────────────────────────────────── */
+.meal-dialog__cart-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.meal-dialog__cart-input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.meal-dialog__cart-select {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 110px;
+  max-width: 160px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.meal-dialog__cart-btn.btn-primary {
+  width: auto;
+  flex-shrink: 0;
+  padding: 12px 16px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meal-dialog__cart-feedback {
+  margin-bottom: 0;
+}
+
+/* ─── Footer ──────────────────────────────────────────── */
+.meal-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 1.375rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ─── Light theme overrides ───────────────────────────── */
+[data-theme='light'] .field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(15,14,26,0.4)' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+}
+

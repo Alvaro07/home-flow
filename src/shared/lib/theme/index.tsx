@@ -17,9 +17,7 @@ const getInitialTheme = (): Theme => {
   const theme: Theme =
     stored === 'light' || stored === 'dark'
       ? stored
-      : window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
+      : 'dark'
   document.documentElement.setAttribute('data-theme', theme)
   return theme
 }
