@@ -97,9 +97,14 @@
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.meal-dialog__mode-btn:hover:not(.meal-dialog__mode-btn--active) {
+.meal-dialog__mode-btn:hover:not(.meal-dialog__mode-btn--active):not(:disabled) {
   background: var(--glass-bg-hover);
   color: var(--text-primary);
+}
+
+.meal-dialog__mode-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
 }
 
 .meal-dialog__mode-btn--active {
@@ -121,11 +126,19 @@
   padding: 12px 20px;
 }
 
+/* ─── Description textarea ────────────────────────────── */
+.meal-dialog__description {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.5;
+}
+
 /* ─── Select custom arrow ─────────────────────────────── */
 .field-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(240,240,248,0.45)' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 13px center;
+  background-size: 12px 8px;
   padding-right: 36px;
   cursor: pointer;
 }
@@ -181,5 +194,8 @@
 /* ─── Light theme overrides ───────────────────────────── */
 [data-theme='light'] .field-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(15,14,26,0.4)' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  background-size: 12px 8px;
 }
 
