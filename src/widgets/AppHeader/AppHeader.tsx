@@ -52,9 +52,6 @@ export const AppHeader = () => {
   const openNav = () => { setIsNavOpen(true) }
   const closeNav = () => { setIsNavOpen(false) }
 
-  // Close on route change
-  useEffect(() => { setIsNavOpen(false) }, [location.pathname])
-
   // Close on Escape
   useEffect(() => {
     if (!isNavOpen) return
