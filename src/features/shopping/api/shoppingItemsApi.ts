@@ -23,7 +23,7 @@ export const shoppingItemsApi = {
       .from('shopping_items')
       .select('*')
       .eq('supermarket_id', supermarketId)
-      .order('position', { ascending: true })
+      .order('position', { ascending: false })
 
     if (error) return { data: null, error: mapError(error) }
     return { data, error: null }

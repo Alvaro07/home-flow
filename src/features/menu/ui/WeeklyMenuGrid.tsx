@@ -76,7 +76,7 @@ export const WeeklyMenuGrid = () => {
               ? <span className="btn-spinner btn-spinner--danger" aria-hidden="true" />
               : <i className="pi pi-trash" aria-hidden="true" />
             }
-            Borrar semana
+            Borrar menú
           </button>
         </div>
       )}
@@ -176,6 +176,7 @@ export const WeeklyMenuGrid = () => {
         className="supermarket-dialog"
         draggable={false}
         resizable={false}
+        blockScroll
       >
         <div className="supermarket-dialog__content">
           <p className="weekly-grid__confirm-msg">
@@ -211,14 +212,15 @@ export const WeeklyMenuGrid = () => {
       <Dialog
         visible={confirmClearWeek}
         onHide={() => { setConfirmClearWeek(false) }}
-        header="Borrar semana completa"
+        header="Borrar menú completo"
         className="supermarket-dialog"
         draggable={false}
         resizable={false}
+        blockScroll
       >
         <div className="supermarket-dialog__content">
           <p className="weekly-grid__confirm-msg">
-            ¿Borrar <strong>todos los platos de la semana</strong>? Esta acción no se puede deshacer.
+            ¿Borrar <strong>todos los platos del menú</strong>? Esta acción no se puede deshacer.
           </p>
           <div className="supermarket-dialog__actions">
             <button
