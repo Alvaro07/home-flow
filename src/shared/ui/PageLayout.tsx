@@ -13,9 +13,7 @@ export const PageLayout = ({ children, withHeader = false }: PageLayoutProps) =>
 
   return (
     <>
-      <div className="app-bg" aria-hidden="true">
-        <div className="app-bg-accent" />
-      </div>
+      <div className="app-bg" aria-hidden="true" />
 
       {/* Theme toggle only on public pages (auth pages) */}
       {!withHeader && (
