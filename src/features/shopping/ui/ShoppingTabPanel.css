@@ -25,6 +25,26 @@
   padding: 14px 20px;
 }
 
+.tab-panel__add-icon {
+  display: none;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+@media (max-width: 570px) {
+  .tab-panel__add-label {
+    display: none;
+  }
+
+  .tab-panel__add-icon {
+    display: inline;
+  }
+
+  .tab-panel__add-btn.btn-primary {
+    padding: 14px 16px;
+  }
+}
+
 /* ─── Skeleton rows ───────────────────────────────────── */
 .tab-panel__skeleton {
   height: 50px;
