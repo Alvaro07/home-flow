@@ -9,7 +9,7 @@
 .card-logo-icon {
   width: 34px;
   height: 34px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--accent-gradient);
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
 .password-strength-bar {
   height: 3px;
   flex: 1;
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
   background: rgba(255, 255, 255, 0.08);
   transition: background 0.3s ease;
 }

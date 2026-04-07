@@ -48,7 +48,8 @@ export const ShoppingTabPanel = ({ supermarketId }: Props) => {
           type="button"
         >
           {create.isPending && <span className="btn-spinner" aria-hidden="true" />}
-          Añadir
+          <span className="tab-panel__add-label">Añadir</span>
+          <span className="tab-panel__add-icon" aria-hidden="true">+</span>
         </button>
       </div>
 

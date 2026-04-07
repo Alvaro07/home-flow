@@ -90,7 +90,7 @@ export const ShoppingPage = () => {
 
   return (
     <PageLayout withHeader>
-      <div className="glass-card shopping-page anim-card">
+      <div className="shopping-page-wrapper anim-card">
         {/* Back */}
         <button
           type="button"
@@ -103,69 +103,74 @@ export const ShoppingPage = () => {
           Volver
         </button>
 
+        <div className="glass-card shopping-page">
         {/* Header */}
         <div className="shopping-page__header anim-2">
           <h1 className="card-title">Lista de la compra</h1>
-          <button
-            type="button"
-            className="btn-primary shopping-page__add-btn"
-            onClick={() => {
-              setDialog({ mode: 'create' })
-            }}
-            disabled={create.isPending}
-          >
-            {create.isPending ? (
-              <span className="btn-spinner" aria-hidden="true" />
-            ) : (
-              <i className="pi pi-plus" />
-            )}
-            Nuevo super
-          </button>
+            <button
+              type="button"
+              className="btn-primary shopping-page__add-btn"
+              onClick={() => {
+                setDialog({ mode: 'create' })
+              }}
+              disabled={create.isPending}
+            >
+              {create.isPending ? (
+                <span className="btn-spinner" aria-hidden="true" />
+              ) : (
+                <i className="pi pi-plus" />
+              )}
+              Nuevo super
+            </button>
         </div>
 
         {/* Tabs */}
         {isLoading ? (
-          <div
-            className="shopping-page__tabs-skeleton"
-            aria-busy="true"
-            aria-label="Cargando supermercados"
-          >
-            <div className="shopping-page__skeleton-nav">
-              {[80, 110, 95].map((w, i) => (
-                <div
-                  key={i}
-                  className="shopping-page__skeleton-tab"
-                  style={
-                    { width: w, '--skeleton-delay': `${String(i * 0.08)}s` } as React.CSSProperties
-                  }
-                />
-              ))}
+            <div
+              className="shopping-page__tabs-skeleton"
+              aria-busy="true"
+              aria-label="Cargando supermercados"
+            >
+              <div className="shopping-page__skeleton-nav">
+                {[80, 110, 95].map((w, i) => (
+                  <div
+                    key={i}
+                    className="shopping-page__skeleton-tab"
+                    style={
+                      {
+                        width: w,
+                        '--skeleton-delay': `${String(i * 0.08)}s`,
+                      } as React.CSSProperties
+                    }
+                  />
+                ))}
+              </div>
+              <div className="shopping-page__skeleton-panel">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="shopping-page__skeleton-row"
+                    style={{ '--skeleton-delay': `${String(i * 0.06)}s` } as React.CSSProperties}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="shopping-page__skeleton-panel">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="shopping-page__skeleton-row"
-                  style={{ '--skeleton-delay': `${String(i * 0.06)}s` } as React.CSSProperties}
-                />
+          ) : (
+            <TabView
+              className="shopping-tabs"
+              activeIndex={activeIndex}
+              onTabChange={(e) => {
+                setActiveIndex(e.index)
+              }}
+            >
+              {orderedTabs.map((sm, index) => (
+                <TabPanel key={sm.id} header={renderTabHeader(sm, index)}>
+                  <ShoppingTabPanel supermarketId={sm.id} />
+                </TabPanel>
               ))}
-            </div>
-          </div>
-        ) : (
-          <TabView
-            className="shopping-tabs anim-3"
-            activeIndex={activeIndex}
-            onTabChange={(e) => {
-              setActiveIndex(e.index)
-            }}
-          >
-            {orderedTabs.map((sm, index) => (
-              <TabPanel key={sm.id} header={renderTabHeader(sm, index)}>
-                <ShoppingTabPanel supermarketId={sm.id} />
-              </TabPanel>
-            ))}
-          </TabView>
+            </TabView>
         )}
+        </div>
 
         {/* Create / edit supermarket dialog */}
         <SupermarketDialog
