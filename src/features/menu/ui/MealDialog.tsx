@@ -127,21 +127,23 @@ export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
               type="button"
               className={`meal-dialog__mode-btn${mode === 'dish' ? ' meal-dialog__mode-btn--active' : ''}`}
               onClick={() => { setMode('dish') }}
+              disabled={!dishesLoading && dishes.length === 0}
+              title={!dishesLoading && dishes.length === 0 ? 'No tienes platos preparados guardados' : undefined}
             >
               <i className="pi pi-book" aria-hidden="true" />
-              Recetas
+              Platos preparados
             </button>
           </div>
 
           {mode === 'text' ? (
-            <input
-              className="field-input"
+            <textarea
+              className="field-input meal-dialog__description"
               value={description}
               onChange={(e) => { setDescription(e.target.value) }}
-              onKeyDown={(e) => { if (e.key === 'Enter' && canSaveMeal) handleSaveMeal() }}
               placeholder="¿Qué vas a preparar?"
               autoFocus
               disabled={upsert.isPending}
+              rows={3}
             />
           ) : (
             <select
@@ -206,7 +208,7 @@ export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
               value={itemName}
               onChange={(e) => { setItemName(e.target.value) }}
               onKeyDown={(e) => { if (e.key === 'Enter') handleAddItem() }}
-              placeholder="Ingrediente o producto…"
+              placeholder="Ingrediente…"
               disabled={addItem.isPending}
               aria-label="Nombre del artículo"
             />
