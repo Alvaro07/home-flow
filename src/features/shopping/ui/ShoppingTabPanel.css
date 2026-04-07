@@ -28,7 +28,7 @@
 /* ─── Skeleton rows ───────────────────────────────────── */
 .tab-panel__skeleton {
   height: 50px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: linear-gradient(
     90deg,
     var(--glass-bg) 25%,
@@ -59,7 +59,7 @@
   font-size: 0.9rem;
   padding: 2.5rem 1rem;
   border: 1px dashed var(--glass-border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
 }
 
 /* ─── Item list ───────────────────────────────────────── */
@@ -73,7 +73,7 @@
 }
 
 .tab-panel__item {
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -100,7 +100,7 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  border-radius: 5px;
+  border-radius: var(--radius-xs);
   border: 1.5px solid var(--glass-border);
   background: transparent;
   cursor: pointer;

@@ -78,7 +78,7 @@
 
 .shopping-page__skeleton-tab {
   height: 36px;
-  border-radius: 8px 8px 0 0;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   background: linear-gradient(
     90deg,
     var(--glass-bg) 25%,
@@ -100,7 +100,7 @@
 
 .shopping-page__skeleton-row {
   height: 50px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--glass-border);
   background: linear-gradient(
     90deg,
@@ -171,7 +171,7 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-bottom: none;
-  border-radius: 8px 8px 0 0;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   color: var(--text-secondary);
   padding: 0.65rem 1rem;
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
@@ -260,7 +260,7 @@
   justify-content: center;
   width: 18px;
   height: 18px;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   border: none;
   background: transparent;
   color: var(--text-secondary);
