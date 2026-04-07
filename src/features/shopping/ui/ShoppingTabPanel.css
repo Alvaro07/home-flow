@@ -16,9 +16,27 @@
   border-bottom: 1px solid var(--glass-border);
 }
 
-.tab-panel__input {
+.tab-panel__input-wrapper {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tab-panel__input {
+  width: 100%;
+}
+
+.tab-panel__input--error {
+  border-color: #ff6b7a !important;
+}
+
+.tab-panel__input-error {
+  font-size: 0.78rem;
+  color: #ff6b7a;
+  margin: 0;
+  padding-left: 2px;
 }
 
 .tab-panel__add-btn.btn-primary {
