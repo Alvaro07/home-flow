@@ -158,6 +158,7 @@ export const ShoppingPage = () => {
             onTabChange={(e) => {
               setActiveIndex(e.index)
             }}
+            scrollable
           >
             {orderedTabs.map((sm, index) => (
               <TabPanel key={sm.id} header={renderTabHeader(sm, index)}>

@@ -131,20 +131,33 @@
   background: transparent;
 }
 
+.shopping-tabs.p-tabview .p-tabview-nav-container {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.shopping-tabs.p-tabview .p-tabview-nav-content {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.shopping-tabs.p-tabview .p-tabview-nav-content::-webkit-scrollbar {
+  display: none;
+}
+
 .shopping-tabs.p-tabview .p-tabview-nav {
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--glass-border);
   gap: 2px;
   display: flex;
   align-items: flex-end;
   flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.shopping-tabs.p-tabview .p-tabview-nav::-webkit-scrollbar {
-  display: none;
+  height: 100%;
 }
 
 .shopping-tabs.p-tabview .p-tabview-nav li {
@@ -181,9 +194,31 @@
 }
 
 .shopping-tabs.p-tabview .p-tabview-nav-btn {
-  background: transparent;
-  color: var(--text-secondary);
+  width: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.shopping-tabs.p-tabview .p-tabview-nav-btn:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg-hover);
+}
+
+.shopping-tabs.p-tabview .p-tabview-nav-btn.p-tabview-nav-prev {
+  border-right: 1px solid var(--glass-border);
+}
+
+.shopping-tabs.p-tabview .p-tabview-nav-btn.p-tabview-nav-next {
+  border-left: 1px solid var(--glass-border);
 }
 
 .shopping-tabs.p-tabview .p-tabview-panels {
