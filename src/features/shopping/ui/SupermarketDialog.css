@@ -8,7 +8,7 @@
 .supermarket-dialog.p-dialog {
   background: var(--dialog-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
   width: min(420px, 90vw);
   overflow: hidden;
@@ -25,7 +25,7 @@
 
 .supermarket-dialog .p-dialog-header-icons .p-dialog-header-close {
   color: var(--text-secondary);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   transition: color 0.2s, background 0.2s;
 }
 
