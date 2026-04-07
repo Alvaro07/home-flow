@@ -67,6 +67,7 @@ export const AppHeader = () => {
   }, [isNavOpen])
 
   const handleNavClick = (route: string) => {
+    closeNav()
     void navigate(route)
   }
 

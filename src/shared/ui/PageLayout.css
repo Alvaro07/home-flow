@@ -36,19 +36,6 @@
   animation-direction: alternate-reverse;
 }
 
-.app-bg-accent {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--bg-mesh-c), transparent 70%);
-  filter: blur(80px);
-  opacity: 0.35;
-  top: 55%;
-  left: 35%;
-  animation: meshFloat 18s ease-in-out infinite alternate;
-}
-
 @media (min-width: 768px) {
   .app-bg::before {
     width: 700px;
@@ -58,10 +45,7 @@
     width: 550px;
     height: 550px;
   }
-  .app-bg-accent {
-    width: 400px;
-    height: 400px;
-  }
+
 }
 
 @keyframes meshFloat {

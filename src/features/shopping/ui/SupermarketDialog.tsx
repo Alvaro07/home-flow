@@ -38,6 +38,7 @@ export const SupermarketDialog = ({
       className="supermarket-dialog"
       draggable={false}
       resizable={false}
+      blockScroll
     >
       <div className="supermarket-dialog__content">
         <input

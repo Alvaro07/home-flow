@@ -10,12 +10,12 @@
 /* ─── Glass card ──────────────────────────────────────── */
 .glass-card.shopping-page {
   max-width: 100%;
-  padding: 1.75rem 1.5rem 2.5rem;
+  padding: 1.75rem;
 }
 
 @media (min-width: 768px) {
   .glass-card.shopping-page {
-    padding: 2.5rem 3rem 3rem;
+    padding: 2.5rem;
   }
 }
 

@@ -108,6 +108,7 @@ export const MealDialog = ({ visible, day, mealType, slot, onHide }: Props) => {
       className="meal-dialog"
       draggable={false}
       resizable={false}
+      blockScroll
     >
       <div className="meal-dialog__content">
 
