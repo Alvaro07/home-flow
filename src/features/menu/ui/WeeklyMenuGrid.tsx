@@ -176,6 +176,7 @@ export const WeeklyMenuGrid = () => {
         className="supermarket-dialog"
         draggable={false}
         resizable={false}
+        blockScroll
       >
         <div className="supermarket-dialog__content">
           <p className="weekly-grid__confirm-msg">
@@ -215,6 +216,7 @@ export const WeeklyMenuGrid = () => {
         className="supermarket-dialog"
         draggable={false}
         resizable={false}
+        blockScroll
       >
         <div className="supermarket-dialog__content">
           <p className="weekly-grid__confirm-msg">

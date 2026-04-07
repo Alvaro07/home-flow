@@ -54,42 +54,49 @@ export const ShoppingTabPanel = ({ supermarketId }: Props) => {
       </div>
 
       {/* Item list */}
-      {isLoading ? (
-        <ul className="tab-panel__list" aria-busy="true" aria-label="Cargando artículos">
-          {Array.from({ length: SKELETON_ROWS }).map((_, i) => (
-            <li key={i} className="tab-panel__skeleton" style={{ '--skeleton-delay': `${String(i * 0.08)}s` } as React.CSSProperties} />
-          ))}
-        </ul>
-      ) : items.length === 0 ? (
-        <div className="tab-panel__empty">
-          Lista vacía — añade tu primer artículo
-        </div>
-      ) : (
-        <ul className="tab-panel__list" role="list">
-          {items.map((item) => {
-            const isSelected = selectedIds.includes(item.id)
-            return (
-              <li
-                key={item.id}
-                className={`tab-panel__item${isSelected ? ' tab-panel__item--selected' : ''}`}
-              >
-                <label className="tab-panel__item-label">
-                  <input
-                    type="checkbox"
-                    className="tab-panel__checkbox"
-                    checked={isSelected}
-                    onChange={(e) => { handleToggle(item.id, e.target.checked) }}
-                  />
-                  <span className="tab-panel__item-name">{item.name}</span>
-                  {item.quantity && (
-                    <span className="tab-panel__item-qty">{item.quantity}</span>
-                  )}
-                </label>
-              </li>
-            )
-          })}
-        </ul>
-      )}
+      <div className="tab-panel__list-wrapper">
+        {(create.isPending || removeMany.isPending) && (
+          <div className="tab-panel__list-overlay" aria-hidden="true">
+            <span className="tab-panel__list-spinner" />
+          </div>
+        )}
+        {isLoading ? (
+          <ul className="tab-panel__list" aria-busy="true" aria-label="Cargando artículos">
+            {Array.from({ length: SKELETON_ROWS }).map((_, i) => (
+              <li key={i} className="tab-panel__skeleton" style={{ '--skeleton-delay': `${String(i * 0.08)}s` } as React.CSSProperties} />
+            ))}
+          </ul>
+        ) : items.length === 0 ? (
+          <div className="tab-panel__empty">
+            Lista vacía — añade tu primer artículo
+          </div>
+        ) : (
+          <ul className="tab-panel__list" role="list">
+            {items.map((item) => {
+              const isSelected = selectedIds.includes(item.id)
+              return (
+                <li
+                  key={item.id}
+                  className={`tab-panel__item${isSelected ? ' tab-panel__item--selected' : ''}`}
+                >
+                  <label className="tab-panel__item-label">
+                    <input
+                      type="checkbox"
+                      className="tab-panel__checkbox"
+                      checked={isSelected}
+                      onChange={(e) => { handleToggle(item.id, e.target.checked) }}
+                    />
+                    <span className="tab-panel__item-name">{item.name}</span>
+                    {item.quantity && (
+                      <span className="tab-panel__item-qty">{item.quantity}</span>
+                    )}
+                  </label>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
 
       {/* Bulk delete action */}
       {selectedIds.length > 0 && (

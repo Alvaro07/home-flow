@@ -11,6 +11,9 @@
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  padding-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .tab-panel__input {
@@ -43,6 +46,36 @@
   .tab-panel__add-btn.btn-primary {
     padding: 14px 16px;
   }
+}
+
+/* ─── List wrapper + overlay ──────────────────────────── */
+.tab-panel__list-wrapper {
+  position: relative;
+}
+
+.tab-panel__list-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border-radius: var(--radius-md);
+  opacity: 0.85;
+}
+
+.tab-panel__list-spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--accent-a);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ─── Skeleton rows ───────────────────────────────────── */
