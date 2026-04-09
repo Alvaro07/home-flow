@@ -30,7 +30,7 @@ export const DishDialog = ({
 }: Props) => {
   const [name, setName] = useState(mode === 'edit' && dish ? dish.name : '')
   const [notes, setNotes] = useState(mode === 'edit' && dish ? (dish.notes ?? '') : '')
-  const [tags, setTags] = useState<string[]>(mode === 'edit' && dish ? dish.tags : [])
+  const [tags, setTags] = useState(mode === 'edit' && dish ? dish.tags : [])
   const [tagInput, setTagInput] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const tagInputRef = useRef<HTMLInputElement>(null)

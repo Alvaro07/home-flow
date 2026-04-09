@@ -15,7 +15,9 @@ const mapError = (error: { message: string; code?: string }): DishError => {
   }
 }
 
-const mapDishRow = (row: Dish & { dish_tags: { tag: string }[] }): DishWithTags => ({
+type DishRow = Dish & { dish_tags: { tag: string }[] }
+
+const mapDishRow = (row: DishRow): DishWithTags => ({
   id: row.id,
   name: row.name,
   notes: row.notes,
@@ -34,7 +36,7 @@ export const dishesApi = {
       .order('name', { ascending: true })
 
     if (error) return { data: null, error: mapError(error) }
-    return { data: (data as any[]).map(mapDishRow), error: null }
+    return { data: (data as unknown as DishRow[]).map(mapDishRow), error: null }
   },
 
   // Obtiene un plato por id con sus tags
@@ -46,7 +48,7 @@ export const dishesApi = {
       .single()
 
     if (error) return { data: null, error: mapError(error) }
-    return { data: mapDishRow(data as any), error: null }
+    return { data: mapDishRow(data as unknown as DishRow), error: null }
   },
 
   // Busca platos por nombre (case-insensitive, búsqueda parcial)
@@ -58,7 +60,7 @@ export const dishesApi = {
       .order('name', { ascending: true })
 
     if (error) return { data: null, error: mapError(error) }
-    return { data: (data as any[]).map(mapDishRow), error: null }
+    return { data: (data as unknown as DishRow[]).map(mapDishRow), error: null }
   },
 
   // Crea un plato e inserta sus tags en dish_tags
