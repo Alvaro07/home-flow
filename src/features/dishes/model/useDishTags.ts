@@ -8,9 +8,9 @@ export const useDishTags = () => {
   const queryClient = useQueryClient()
 
   const invalidateAll = () => {
-    queryClient.invalidateQueries({ queryKey: dishTagsQueryKey })
+    void queryClient.invalidateQueries({ queryKey: dishTagsQueryKey })
     // Invalidar platos también ya que los tags van incrustados en DishWithTags
-    queryClient.invalidateQueries({ queryKey: ['dishes'] })
+    void queryClient.invalidateQueries({ queryKey: ['dishes'] })
   }
 
   const query = useQuery({
