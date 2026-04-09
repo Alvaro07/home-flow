@@ -5,6 +5,7 @@ import { RegisterPage } from '@pages/RegisterPage'
 import { DashboardPage } from '@pages/DashboardPage'
 import { ShoppingPage } from '@pages/ShoppingPage'
 import { MenuPage } from '@pages/MenuPage'
+import { DishesPage } from '@pages/DishesPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
 import { ProtectedRoute } from '@widgets/ProtectedRoute'
 
@@ -42,6 +43,15 @@ export const AppRouter = () => {
           element={
             <ProtectedRoute>
               <MenuPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.DISHES}
+          element={
+            <ProtectedRoute>
+              <DishesPage />
             </ProtectedRoute>
           }
         />
