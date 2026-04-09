@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { PageLayout } from '@shared/ui/PageLayout'
-import { CartIcon, CalendarIcon } from '@shared/ui/icons'
+import { CartIcon, CalendarIcon, DishesIcon } from '@shared/ui/icons'
 import { ROUTES } from '@app/router/routes'
 import './DashboardPage.css'
 
@@ -23,6 +23,12 @@ const NAV_ITEMS: NavItem[] = [
     description: 'Planifica los platos de la semana',
     icon: <CalendarIcon width={28} height={28} />,
     route: ROUTES.MENU,
+  },
+  {
+    label: 'Platos predefinidos',
+    description: 'Tu recetario personal de platos',
+    icon: <DishesIcon width={28} height={28} />,
+    route: ROUTES.DISHES,
   },
 ]
 

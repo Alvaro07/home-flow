@@ -1,0 +1,296 @@
+/* ─── Page wrapper ─────────────────────────────────────── */
+.dishes-page-wrapper {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+}
+
+/* ─── Glass card ───────────────────────────────────────── */
+.glass-card.dishes-page {
+  max-width: 100%;
+  padding: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .glass-card.dishes-page {
+    padding: 2.5rem;
+  }
+}
+
+/* ─── Back button ──────────────────────────────────────── */
+.dishes-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.dishes-page__back:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Header ───────────────────────────────────────────── */
+.dishes-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dishes-page__header .card-title {
+  margin-bottom: 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.dishes-page__add-btn.btn-primary {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 10px 18px;
+}
+
+/* ─── Tag filter bar ───────────────────────────────────── */
+.dishes-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.dishes-page__tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.dishes-page__tag-pill:hover {
+  background: var(--glass-bg-hover);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.dishes-page__tag-pill--active {
+  background: rgba(108, 99, 255, 0.14);
+  border-color: rgba(108, 99, 255, 0.35);
+  color: var(--accent-a);
+}
+
+.dishes-page__tag-pill--active:hover {
+  background: rgba(108, 99, 255, 0.2);
+}
+
+/* ─── Dish list ────────────────────────────────────────── */
+.dishes-page__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ─── Dish item ────────────────────────────────────────── */
+.dishes-page__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.dishes-page__item:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dishes-page__item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.dishes-page__item-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.dishes-page__item-notes {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.dishes-page__item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.dishes-page__item-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  background: rgba(108, 99, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgba(108, 99, 255, 0.85);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dishes-page__item-tag:hover {
+  background: rgba(108, 99, 255, 0.16);
+  border-color: rgba(108, 99, 255, 0.4);
+  color: var(--accent-a);
+}
+
+.dishes-page__item-tag--active {
+  background: rgba(108, 99, 255, 0.2);
+  border-color: rgba(108, 99, 255, 0.5);
+  color: var(--accent-a);
+}
+
+/* ─── Item action buttons ──────────────────────────────── */
+.dishes-page__item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.dishes-page__item:hover .dishes-page__item-actions {
+  opacity: 1;
+}
+
+.dishes-page__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.dishes-page__action-btn:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg-hover);
+}
+
+.dishes-page__action-btn--delete:hover {
+  color: #ff6b7a;
+  background: rgba(255, 107, 122, 0.1);
+}
+
+/* ─── Empty state ──────────────────────────────────────── */
+.dishes-page__empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.dishes-page__empty strong {
+  color: var(--text-primary);
+}
+
+/* ─── Skeleton ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.dishes-page__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dishes-page__skeleton-row {
+  height: 72px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(
+    90deg,
+    var(--glass-bg) 25%,
+    var(--glass-bg-shimmer) 50%,
+    var(--glass-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  animation-delay: var(--skeleton-delay, 0s);
+}
+
+/* ─── Confirm delete message ───────────────────────────── */
+.dishes-page__confirm-msg {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+}
+
+.dishes-page__confirm-msg strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
