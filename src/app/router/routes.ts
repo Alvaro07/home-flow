@@ -4,6 +4,7 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   SHOPPING: '/shopping',
   MENU: '/menu',
+  DISHES: '/dishes',
   NOT_FOUND: '*',
 } as const
 

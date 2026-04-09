@@ -120,6 +120,26 @@ export const CalendarIcon = ({ width = 20, height = 20, className }: IconProps) 
   </svg>
 )
 
+export const DishesIcon = ({ width = 16, height = 16, className }: IconProps) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+    <path d="M7 2v20" />
+    <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z" />
+    <path d="M21 15v7" />
+  </svg>
+)
+
 export const LogoutIcon = ({ width = 14, height = 14, className }: IconProps) => (
   <svg
     width={width}
