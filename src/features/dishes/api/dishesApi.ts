@@ -1,5 +1,15 @@
 import { supabase } from '@shared/lib/supabase'
-import type { DishResult, DishError, Dish, DishWithTags, CreateDishInput, UpdateDishInput } from './dishes.types'
+import type {
+  DishResult,
+  DishError,
+  Dish,
+  DishWithTags,
+  DishesPage,
+  CreateDishInput,
+  UpdateDishInput,
+} from './dishes.types'
+
+export const PAGE_SIZE = 10
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -28,15 +38,54 @@ const mapDishRow = (row: DishRow): DishWithTags => ({
 // ─── API ────────────────────────────────────────────────────────────────────
 
 export const dishesApi = {
-  // Obtiene todos los platos del usuario con sus tags, ordenados por nombre
-  getAll: async (): Promise<DishResult<DishWithTags[]>> => {
-    const { data, error } = await supabase
+  // Obtiene platos paginados, con filtro opcional por tag
+  getAll: async ({
+    page = 0,
+    pageSize = PAGE_SIZE,
+    tag,
+  }: { page?: number; pageSize?: number; tag?: string | null } = {}): Promise<
+    DishResult<DishesPage>
+  > => {
+    const from = page * pageSize
+    const to = from + pageSize - 1
+
+    if (tag) {
+      // Obtener IDs de platos que tienen este tag, luego traer datos completos
+      const { data: tagMatches, error: tagError } = await supabase
+        .from('dish_tags')
+        .select('dish_id')
+        .eq('tag', tag)
+
+      if (tagError) return { data: null, error: mapError(tagError) }
+
+      const ids = tagMatches.map((r: { dish_id: string }) => r.dish_id)
+      if (ids.length === 0) return { data: { dishes: [], total: 0 }, error: null }
+
+      const { data, count, error } = await supabase
+        .from('dishes')
+        .select('id, name, notes, created_at, dish_tags(tag)', { count: 'exact' })
+        .in('id', ids)
+        .order('name', { ascending: true })
+        .range(from, to)
+
+      if (error) return { data: null, error: mapError(error) }
+      return {
+        data: { dishes: (data as unknown as DishRow[]).map(mapDishRow), total: count ?? 0 },
+        error: null,
+      }
+    }
+
+    const { data, count, error } = await supabase
       .from('dishes')
-      .select('id, name, notes, created_at, dish_tags(tag)')
+      .select('id, name, notes, created_at, dish_tags(tag)', { count: 'exact' })
       .order('name', { ascending: true })
+      .range(from, to)
 
     if (error) return { data: null, error: mapError(error) }
-    return { data: (data as unknown as DishRow[]).map(mapDishRow), error: null }
+    return {
+      data: { dishes: (data as unknown as DishRow[]).map(mapDishRow), total: count ?? 0 },
+      error: null,
+    }
   },
 
   // Obtiene un plato por id con sus tags
@@ -65,7 +114,9 @@ export const dishesApi = {
 
   // Crea un plato e inserta sus tags en dish_tags
   create: async (input: CreateDishInput): Promise<DishResult<DishWithTags>> => {
-    const { data: { session } } = await supabase.auth.getSession()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
     if (!session) return { data: null, error: { message: 'No autenticado' } }
 
     const { data: dish, error: dishError } = await supabase
