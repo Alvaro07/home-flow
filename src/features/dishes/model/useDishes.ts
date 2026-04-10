@@ -1,22 +1,32 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { dishesApi } from '../api/dishesApi'
+import { dishesApi, PAGE_SIZE } from '../api/dishesApi'
 import type { CreateDishInput, UpdateDishInput } from '../api/dishes.types'
 import { DishApiError } from '../api/dishes.types'
 
 export const dishesQueryKey = ['dishes'] as const
 
-export const useDishes = () => {
+interface DishesParams {
+  page?: number
+  pageSize?: number
+  tag?: string | null
+}
+
+export const useDishes = ({ page = 0, pageSize = PAGE_SIZE, tag = null }: DishesParams = {}) => {
   const queryClient = useQueryClient()
 
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: dishesQueryKey })
+  const invalidate = () => {
+    void queryClient.invalidateQueries({ queryKey: dishesQueryKey })
+    void queryClient.invalidateQueries({ queryKey: ['dish-tags'] })
+  }
 
   const query = useQuery({
-    queryKey: dishesQueryKey,
+    queryKey: [...dishesQueryKey, page, pageSize, tag],
     queryFn: async () => {
-      const result = await dishesApi.getAll()
+      const result = await dishesApi.getAll({ page, pageSize, tag })
       if (result.error) throw new DishApiError(result.error)
       return result.data
     },
+    placeholderData: (prev) => prev,
   })
 
   const create = useMutation({
@@ -45,9 +55,15 @@ export const useDishes = () => {
     onSuccess: invalidate,
   })
 
+  const total = query.data?.total ?? 0
+  const pageCount = Math.ceil(total / pageSize)
+
   return {
-    dishes: query.data ?? [],
+    dishes: query.data?.dishes ?? [],
+    total,
+    pageCount,
     isLoading: query.isLoading,
+    isFetching: query.isFetching,
     error: query.error,
     create,
     update,
