@@ -1,3 +1,9 @@
+/* ─── Dialog overlay ──────────────────────────────────── */
+.p-dialog-mask {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
 /* ─── Dialog overrides ─────────────────────────────────── */
 .dish-dialog.p-dialog {
   background: var(--dialog-bg);

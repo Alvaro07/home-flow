@@ -28,18 +28,25 @@ const createWrapper = () => {
 describe('useDishes', () => {
   describe('query', () => {
     it('devuelve los platos cuando la API tiene éxito', async () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValueOnce({ data: [mockDish], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValueOnce({
+        data: { dishes: [mockDish], total: 1 },
+        error: null,
+      })
 
       const { result } = renderHook(() => useDishes(), { wrapper: createWrapper() })
 
       await waitFor(() => { expect(result.current.isLoading).toBe(false) })
 
       expect(result.current.dishes).toEqual([mockDish])
+      expect(result.current.total).toBe(1)
       expect(result.current.error).toBeNull()
     })
 
     it('devuelve lista vacía mientras carga', () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValueOnce({ data: [mockDish], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValueOnce({
+        data: { dishes: [mockDish], total: 1 },
+        error: null,
+      })
 
       const { result } = renderHook(() => useDishes(), { wrapper: createWrapper() })
 
@@ -63,7 +70,7 @@ describe('useDishes', () => {
 
   describe('create', () => {
     it('llama a la API con los datos correctos', async () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: [], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: { dishes: [], total: 0 }, error: null })
       const spy = vi.spyOn(dishesApi, 'create').mockResolvedValueOnce({ data: mockDish, error: null })
 
       const { result } = renderHook(() => useDishes(), { wrapper: createWrapper() })
@@ -76,7 +83,7 @@ describe('useDishes', () => {
     })
 
     it('expone error cuando la mutación falla', async () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: [], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: { dishes: [], total: 0 }, error: null })
       vi.spyOn(dishesApi, 'create').mockResolvedValueOnce({
         data: null,
         error: { message: 'Ya existe un plato con ese nombre' },
@@ -94,7 +101,7 @@ describe('useDishes', () => {
 
   describe('update', () => {
     it('llama a la API con el id y los datos correctos', async () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: [], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: { dishes: [], total: 0 }, error: null })
       const spy = vi.spyOn(dishesApi, 'update').mockResolvedValueOnce({
         data: { ...mockDish, name: 'Paella valenciana' },
         error: null,
@@ -112,7 +119,7 @@ describe('useDishes', () => {
 
   describe('remove', () => {
     it('llama a la API con el id correcto', async () => {
-      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: [], error: null })
+      vi.spyOn(dishesApi, 'getAll').mockResolvedValue({ data: { dishes: [], total: 0 }, error: null })
       const spy = vi.spyOn(dishesApi, 'remove').mockResolvedValueOnce({ data: undefined, error: null })
 
       const { result } = renderHook(() => useDishes(), { wrapper: createWrapper() })

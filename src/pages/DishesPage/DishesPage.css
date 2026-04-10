@@ -69,9 +69,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--glass-border);
 }
 
 .dishes-page__tag-pill {
@@ -257,8 +255,12 @@
 
 /* ─── Skeleton ─────────────────────────────────────────── */
 @keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .dishes-page__skeleton {
@@ -280,6 +282,64 @@
   background-size: 200% 100%;
   animation: shimmer 1.4s ease-in-out infinite;
   animation-delay: var(--skeleton-delay, 0s);
+}
+
+/* ─── List fetching state ──────────────────────────────── */
+.dishes-page__list--fetching {
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+/* ─── Pagination ───────────────────────────────────────── */
+.dishes-page__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.dishes-page__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dishes-page__page-btn:hover:not(:disabled) {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.dishes-page__page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dishes-page__page-info {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  min-width: 100px;
+  text-align: center;
+}
+
+.dishes-page__page-total {
+  color: var(--text-muted);
+  margin-left: 0.35rem;
 }
 
 /* ─── Confirm delete message ───────────────────────────── */

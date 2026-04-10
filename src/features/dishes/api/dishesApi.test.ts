@@ -26,15 +26,20 @@ const mockDishWithTags = {
 
 describe('dishesApi', () => {
   describe('getAll', () => {
-    it('devuelve los platos con tags sin error', async () => {
+    it('devuelve los platos paginados con total sin error', async () => {
       server.use(
-        http.get(BASE_URL, () => HttpResponse.json([mockDishRow])),
+        http.get(BASE_URL, () =>
+          HttpResponse.json([mockDishRow], {
+            headers: { 'Content-Range': '0-0/1' },
+          }),
+        ),
       )
 
       const result = await dishesApi.getAll()
 
       expect(result.error).toBeNull()
-      expect(result.data).toEqual([mockDishWithTags])
+      expect(result.data?.dishes).toEqual([mockDishWithTags])
+      expect(result.data?.total).toBe(1)
     })
 
     it('devuelve error cuando falla la petición', async () => {

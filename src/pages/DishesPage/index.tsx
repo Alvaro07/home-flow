@@ -6,6 +6,7 @@ import { PageLayout } from '@shared/ui/PageLayout'
 import { useDishes } from '@features/dishes/model/useDishes'
 import { useDishTags } from '@features/dishes/model/useDishTags'
 import { dishTagsApi } from '@features/dishes/api/dishTagsApi'
+import { PAGE_SIZE } from '@features/dishes/api/dishesApi'
 import { DishDialog } from '@features/dishes/ui/DishDialog'
 import type { DishWithTags } from '@features/dishes/api/dishes.types'
 import { ROUTES } from '@app/router/routes'
@@ -19,17 +20,23 @@ interface DialogState {
 export const DishesPage = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const { dishes, isLoading, create, update, remove } = useDishes()
-  const { tags: allTags } = useDishTags()
-
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [page, setPage] = useState(0)
   const [dialog, setDialog] = useState<DialogState | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<DishWithTags | null>(null)
   const [isSaving, setIsSaving] = useState(false)
 
-  const filteredDishes = activeTag
-    ? dishes.filter((d) => d.tags.includes(activeTag))
-    : dishes
+  const { dishes, total, pageCount, isLoading, isFetching, create, update, remove } = useDishes({
+    page,
+    pageSize: PAGE_SIZE,
+    tag: activeTag,
+  })
+  const { tags: allTags } = useDishTags()
+
+  const handleTagChange = (tag: string | null) => {
+    setActiveTag(tag)
+    setPage(0)
+  }
 
   const handleSave = async ({ name, notes, tags }: { name: string; notes: string; tags: string[] }) => {
     if (!dialog) return
@@ -63,11 +70,10 @@ export const DishesPage = () => {
   const handleConfirmedRemove = () => {
     if (!confirmDelete) return
     remove.mutate(confirmDelete.id)
-    if (activeTag && !dishes.some((d) => d.id !== confirmDelete.id && d.tags.includes(activeTag))) {
-      setActiveTag(null)
-    }
     setConfirmDelete(null)
   }
+
+  const showPagination = pageCount > 1
 
   return (
     <PageLayout withHeader>
@@ -107,7 +113,7 @@ export const DishesPage = () => {
                 type="button"
                 role="listitem"
                 className={`dishes-page__tag-pill${activeTag === null ? ' dishes-page__tag-pill--active' : ''}`}
-                onClick={() => { setActiveTag(null) }}
+                onClick={() => { handleTagChange(null) }}
               >
                 Todos
               </button>
@@ -117,7 +123,7 @@ export const DishesPage = () => {
                   type="button"
                   role="listitem"
                   className={`dishes-page__tag-pill${activeTag === tag ? ' dishes-page__tag-pill--active' : ''}`}
-                  onClick={() => { setActiveTag(activeTag === tag ? null : tag) }}
+                  onClick={() => { handleTagChange(activeTag === tag ? null : tag) }}
                 >
                   {tag}
                 </button>
@@ -136,15 +142,18 @@ export const DishesPage = () => {
                 />
               ))}
             </div>
-          ) : filteredDishes.length === 0 ? (
+          ) : dishes.length === 0 ? (
             <div className="dishes-page__empty anim-3">
               {activeTag
                 ? <>No hay platos con el tag <strong>{activeTag}</strong></>
                 : 'Aún no tienes platos guardados. ¡Crea el primero!'}
             </div>
           ) : (
-            <ul className="dishes-page__list anim-3" role="list">
-              {filteredDishes.map((dish) => (
+            <ul
+              className={`dishes-page__list anim-3${isFetching ? ' dishes-page__list--fetching' : ''}`}
+              role="list"
+            >
+              {dishes.map((dish) => (
                 <li key={dish.id} className="dishes-page__item">
                   <div className="dishes-page__item-body">
                     <span className="dishes-page__item-name">{dish.name}</span>
@@ -158,7 +167,7 @@ export const DishesPage = () => {
                             key={tag}
                             type="button"
                             className={`dishes-page__item-tag${activeTag === tag ? ' dishes-page__item-tag--active' : ''}`}
-                            onClick={() => { setActiveTag(activeTag === tag ? null : tag) }}
+                            onClick={() => { handleTagChange(activeTag === tag ? null : tag) }}
                           >
                             {tag}
                           </button>
@@ -187,6 +196,34 @@ export const DishesPage = () => {
                 </li>
               ))}
             </ul>
+          )}
+
+          {/* Pagination */}
+          {showPagination && (
+            <div className="dishes-page__pagination">
+              <button
+                type="button"
+                className="dishes-page__page-btn"
+                onClick={() => { setPage((p) => p - 1) }}
+                disabled={page === 0}
+                aria-label="Página anterior"
+              >
+                <i className="pi pi-chevron-left" />
+              </button>
+              <span className="dishes-page__page-info">
+                {page + 1} / {pageCount}
+                <span className="dishes-page__page-total">· {total} platos</span>
+              </span>
+              <button
+                type="button"
+                className="dishes-page__page-btn"
+                onClick={() => { setPage((p) => p + 1) }}
+                disabled={page >= pageCount - 1}
+                aria-label="Página siguiente"
+              >
+                <i className="pi pi-chevron-right" />
+              </button>
+            </div>
           )}
         </div>
 

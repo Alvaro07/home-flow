@@ -32,3 +32,8 @@ export interface UpdateDishInput {
   name?: string
   notes?: string | null
 }
+
+export interface DishesPage {
+  dishes: DishWithTags[]
+  total: number
+}
