@@ -9,9 +9,10 @@ interface DishesParams {
   page?: number
   pageSize?: number
   tag?: string | null
+  search?: string | null
 }
 
-export const useDishes = ({ page = 0, pageSize = PAGE_SIZE, tag = null }: DishesParams = {}) => {
+export const useDishes = ({ page = 0, pageSize = PAGE_SIZE, tag = null, search = null }: DishesParams = {}) => {
   const queryClient = useQueryClient()
 
   const invalidate = () => {
@@ -20,9 +21,9 @@ export const useDishes = ({ page = 0, pageSize = PAGE_SIZE, tag = null }: Dishes
   }
 
   const query = useQuery({
-    queryKey: [...dishesQueryKey, page, pageSize, tag],
+    queryKey: [...dishesQueryKey, page, pageSize, tag, search],
     queryFn: async () => {
-      const result = await dishesApi.getAll({ page, pageSize, tag })
+      const result = await dishesApi.getAll({ page, pageSize, tag, search })
       if (result.error) throw new DishApiError(result.error)
       return result.data
     },

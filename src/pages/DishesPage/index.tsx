@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Dialog } from 'primereact/dialog'
 import { useQueryClient } from '@tanstack/react-query'
@@ -22,6 +22,9 @@ export const DishesPage = () => {
   const queryClient = useQueryClient()
   const [activeTag, setActiveTag] = useState<string | null>(null)
   const [page, setPage] = useState(0)
+  const [searchInput, setSearchInput] = useState('')
+  const [search, setSearch] = useState('')
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
   const [dialog, setDialog] = useState<DialogState | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<DishWithTags | null>(null)
   const [isSaving, setIsSaving] = useState(false)
@@ -30,11 +33,30 @@ export const DishesPage = () => {
     page,
     pageSize: PAGE_SIZE,
     tag: activeTag,
+    search,
   })
+
+  useEffect(() => {
+    searchTimerRef.current = setTimeout(() => {
+      setSearch(searchInput)
+      setPage(0)
+    }, 300)
+    return () => { clearTimeout(searchTimerRef.current) }
+  }, [searchInput])
   const { tags: allTags } = useDishTags()
 
   const handleTagChange = (tag: string | null) => {
     setActiveTag(tag)
+    setPage(0)
+  }
+
+  const handleSearchChange = (value: string) => {
+    setSearchInput(value)
+  }
+
+  const handleSearchClear = () => {
+    setSearchInput('')
+    setSearch('')
     setPage(0)
   }
 
@@ -106,6 +128,28 @@ export const DishesPage = () => {
             </button>
           </div>
 
+          {/* Search */}
+          <div className="dishes-page__search anim-3">
+            <i className="pi pi-search dishes-page__search-icon" />
+            <input
+              type="search"
+              className="dishes-page__search-input"
+              placeholder="Buscar platos…"
+              value={searchInput}
+              onChange={(e) => { handleSearchChange(e.target.value) }}
+            />
+            {searchInput && (
+              <button
+                type="button"
+                className="dishes-page__search-clear"
+                aria-label="Limpiar búsqueda"
+                onClick={handleSearchClear}
+              >
+                <i className="pi pi-times" />
+              </button>
+            )}
+          </div>
+
           {/* Tag filter */}
           {allTags.length > 0 && (
             <div className="dishes-page__tags anim-3" role="list" aria-label="Filtrar por tag">
@@ -144,11 +188,19 @@ export const DishesPage = () => {
             </div>
           ) : dishes.length === 0 ? (
             <div className="dishes-page__empty anim-3">
-              {activeTag
-                ? <>No hay platos con el tag <strong>{activeTag}</strong></>
-                : 'Aún no tienes platos guardados. ¡Crea el primero!'}
+              {search
+                ? <>Sin resultados para <strong>{search}</strong></>
+                : activeTag
+                  ? <>No hay platos con el tag <strong>{activeTag}</strong></>
+                  : 'Aún no tienes platos guardados. ¡Crea el primero!'}
             </div>
           ) : (
+            <div className="dishes-page__list-container">
+              {isFetching && (
+                <div className="dishes-page__list-loading" aria-label="Actualizando platos">
+                  <span className="dishes-page__list-spinner" aria-hidden="true" />
+                </div>
+              )}
             <ul
               className={`dishes-page__list anim-3${isFetching ? ' dishes-page__list--fetching' : ''}`}
               role="list"
@@ -160,7 +212,7 @@ export const DishesPage = () => {
                     {dish.notes && (
                       <span className="dishes-page__item-notes">{dish.notes}</span>
                     )}
-                    {dish.tags.length > 0 && (
+                    <div className="dishes-page__item-footer">
                       <div className="dishes-page__item-tags">
                         {dish.tags.map((tag) => (
                           <button
@@ -173,29 +225,30 @@ export const DishesPage = () => {
                           </button>
                         ))}
                       </div>
-                    )}
-                  </div>
-                  <div className="dishes-page__item-actions">
-                    <button
-                      type="button"
-                      className="dishes-page__action-btn"
-                      aria-label={`Editar ${dish.name}`}
-                      onClick={() => { setDialog({ mode: 'edit', dish }) }}
-                    >
-                      <i className="pi pi-pencil" />
-                    </button>
-                    <button
-                      type="button"
-                      className="dishes-page__action-btn dishes-page__action-btn--delete"
-                      aria-label={`Eliminar ${dish.name}`}
-                      onClick={() => { setConfirmDelete(dish) }}
-                    >
-                      <i className="pi pi-trash" />
-                    </button>
+                      <div className="dishes-page__item-actions">
+                        <button
+                          type="button"
+                          className="dishes-page__action-btn"
+                          aria-label={`Editar ${dish.name}`}
+                          onClick={() => { setDialog({ mode: 'edit', dish }) }}
+                        >
+                          <i className="pi pi-pencil" />
+                        </button>
+                        <button
+                          type="button"
+                          className="dishes-page__action-btn dishes-page__action-btn--delete"
+                          aria-label={`Eliminar ${dish.name}`}
+                          onClick={() => { setConfirmDelete(dish) }}
+                        >
+                          <i className="pi pi-trash" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </li>
               ))}
             </ul>
+            </div>
           )}
 
           {/* Pagination */}
