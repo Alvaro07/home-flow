@@ -38,12 +38,13 @@ const mapDishRow = (row: DishRow): DishWithTags => ({
 // ─── API ────────────────────────────────────────────────────────────────────
 
 export const dishesApi = {
-  // Obtiene platos paginados, con filtro opcional por tag
+  // Obtiene platos paginados, con filtro opcional por tag y búsqueda por nombre
   getAll: async ({
     page = 0,
     pageSize = PAGE_SIZE,
     tag,
-  }: { page?: number; pageSize?: number; tag?: string | null } = {}): Promise<
+    search,
+  }: { page?: number; pageSize?: number; tag?: string | null; search?: string | null } = {}): Promise<
     DishResult<DishesPage>
   > => {
     const from = page * pageSize
@@ -61,13 +62,16 @@ export const dishesApi = {
       const ids = tagMatches.map((r: { dish_id: string }) => r.dish_id)
       if (ids.length === 0) return { data: { dishes: [], total: 0 }, error: null }
 
-      const { data, count, error } = await supabase
+      let query = supabase
         .from('dishes')
         .select('id, name, notes, created_at, dish_tags(tag)', { count: 'exact' })
         .in('id', ids)
         .order('name', { ascending: true })
         .range(from, to)
 
+      if (search) query = query.ilike('name', `%${search}%`)
+
+      const { data, count, error } = await query
       if (error) return { data: null, error: mapError(error) }
       return {
         data: { dishes: (data as unknown as DishRow[]).map(mapDishRow), total: count ?? 0 },
@@ -75,12 +79,15 @@ export const dishesApi = {
       }
     }
 
-    const { data, count, error } = await supabase
+    let query = supabase
       .from('dishes')
       .select('id, name, notes, created_at, dish_tags(tag)', { count: 'exact' })
       .order('name', { ascending: true })
       .range(from, to)
 
+    if (search) query = query.ilike('name', `%${search}%`)
+
+    const { data, count, error } = await query
     if (error) return { data: null, error: mapError(error) }
     return {
       data: { dishes: (data as unknown as DishRow[]).map(mapDishRow), total: count ?? 0 },
