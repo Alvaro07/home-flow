@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuthStore, selectUser, useAuth } from '@features/auth'
 import { useTheme } from '@shared/lib/theme'
-import { SunIcon, MoonIcon, LogoutIcon, CartIcon, CalendarIcon } from '@shared/ui/icons'
+import { SunIcon, MoonIcon, LogoutIcon, CartIcon, CalendarIcon, DishesIcon } from '@shared/ui/icons'
 import { LogoMark } from '@shared/ui/logo/LogoMark'
 import { ROUTES } from '@app/router/routes'
 import './AppHeader.css'
@@ -36,6 +36,11 @@ const NAV_ENTRIES: NavEntry[] = [
     label: 'Menú semanal',
     route: ROUTES.MENU,
     icon: <CalendarIcon width={17} height={17} />,
+  },
+  {
+    label: 'Platos predefinidos',
+    route: ROUTES.DISHES,
+    icon: <DishesIcon width={17} height={17} />,
   },
 ]
 
